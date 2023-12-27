@@ -1,0 +1,69 @@
+{
+    "manager": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "admin"
+        }
+    ],
+    "category": [
+        {
+            "id": 1,
+            "name": "Programming"
+        },
+        {
+            "id": 2,
+            "name": "Self-help"
+        },
+        {
+            "id": 3,
+            "name": "History"
+        },
+        {
+            "id": 4,
+            "name": "Romance"
+        },
+        {
+            "id": 5,
+            "name": "Short Stories"
+        }
+    ],
+    "books": [
+        {
+            "id": 1,
+            "categoryId": 1,
+            "name": "Angular Programming",
+            "status": "available"
+        },
+        {
+            "id": 2,
+            "categoryId": 1,
+            "name": "fdvfvd",
+            "status": "available"
+        },
+        {
+            "id": 3,
+            "categoryId": 2,
+            "name": "dvvsvsdv",
+            "status": "available"
+        },
+        {
+            "id": 4,
+            "categoryId": 3,
+            "name": "dsvegv",
+            "status": "available"
+        },
+        {
+            "id": 5,
+            "categoryId": 4,
+            "name": "evwbt",
+            "status": "available"
+        },
+        {
+            "id": 6,
+            "categoryId": 5,
+            "name": "ưveewv",
+            "status": "available"
+        }
+    ]
+}
