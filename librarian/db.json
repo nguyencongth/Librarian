@@ -79,9 +79,9 @@
         }
     ],
     "borrow": [
-        { "id": 1, "borrowName":"Nguyen Van A", "bookId": 1, "borrowDate": "2023-12-26", "dueDate": "2023-12-29", "status":"Returned"},
-        { "id": 2, "borrowName":"Nguyen Van A", "bookId": 2, "borrowDate": "2023-12-26", "dueDate": "", "status":"Borrowing"},
-        { "id": 3, "borrowName":"Nguyen Van B", "bookId": 1, "borrowDate": "2023-12-27", "dueDate": "", "status":"Borrowing"},
-        { "id": 4, "borrowName":"Nguyen Van C", "bookId": 3, "borrowDate": "2023-12-28", "dueDate": "", "status":"Borrowing"}
+        { "id": 1, "borrowName":"Nguyen Van A", "bookId": 1, "categoryId": 1,"borrowDate": "2023-12-26", "dueDate": "2023-12-29", "status":"Returned"},
+        { "id": 2, "borrowName":"Nguyen Van A", "bookId": 2, "categoryId": 1, "borrowDate": "2023-12-26", "dueDate": "", "status":"Borrowing"},
+        { "id": 3, "borrowName":"Nguyen Van B", "bookId": 1, "categoryId": 1, "borrowDate": "2023-12-27", "dueDate": "", "status":"Borrowing"},
+        { "id": 4, "borrowName":"Nguyen Van C", "bookId": 3, "categoryId": 2, "borrowDate": "2023-12-28", "dueDate": "", "status":"Borrowing"}
     ]
 }

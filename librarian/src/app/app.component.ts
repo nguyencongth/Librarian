@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from './Layout/login/login.component';
-import { NavigationComponent } from './Layout/navigation/navigation.component';
+import { NavbarComponent } from './Layout/navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,9 @@ import { NavigationComponent } from './Layout/navigation/navigation.component';
   imports: [
     CommonModule, 
     RouterOutlet,
+    HttpClientModule,
     LoginComponent,
-    NavigationComponent
+    NavbarComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
