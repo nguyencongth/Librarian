@@ -49,7 +49,7 @@
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
                 <button style="margin-right: 4px;" mat-raised-button color="primary">Detail</button>
-                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="warn" (click)="deleteUser(element.id)">Delete</button>
             </td>
         </ng-container>
       

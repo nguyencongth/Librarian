@@ -29,7 +29,7 @@ export class BookComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'categoryId', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
   data: any[] =[];
   dataSource = new MatTableDataSource(this.data);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
@@ -52,5 +52,15 @@ export class BookComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteUser(id: number) {
+    const url = 'http://localhost:3000/books'
+    console.log("log")
+    this.http.delete(`${url}/${id}`)
+    .subscribe((res: any) => {
+      console.log(res)
+    })
+    this.fetchData();
   }
 }
