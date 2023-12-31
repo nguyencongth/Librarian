@@ -1,87 +1,119 @@
 {
   "manager": [
-      {
-          "id": 1,
-          "username": "admin",
-          "password": "admin"
-      }
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin"
+    }
   ],
   "category": [
-      {
-          "id": 1,
-          "name": "Programming"
-      },
-      {
-          "id": 2,
-          "name": "Self-help"
-      },
-      {
-          "id": 3,
-          "name": "History"
-      },
-      {
-          "id": 4,
-          "name": "Romance"
-      },
-      {
-          "id": 5,
-          "name": "Short Stories"
-      }
+    {
+      "id": 1,
+      "name": "Programming"
+    },
+    {
+      "id": 2,
+      "name": "Self-help"
+    },
+    {
+      "id": 3,
+      "name": "History"
+    },
+    {
+      "id": 4,
+      "name": "Romance"
+    },
+    {
+      "id": 5,
+      "name": "Short Stories"
+    }
   ],
   "books": [
-      {
-          "id": 1,
-          "categoryId": 1,
-          "name": "Angular Programming",
-          "quanttity": 20,
-          "quantityBorrowed": 1,
-          "status": "available"
-      },
-      {
-          "id": 2,
-          "categoryId": 1,
-          "name": "fdvfvd",
-          "quanttity": 20,
-          "quantityBorrowed": 1,
-          "status": "available"
-      },
-      {
-          "id": 3,
-          "categoryId": 2,
-          "name": "dvvsvsdv",
-          "quanttity": 20,
-          "quantityBorrowed": 1,
-          "status": "available"
-      },
-      {
-          "id": 4,
-          "categoryId": 3,
-          "name": "dsvegv",
-          "quanttity": 20,
-          "quantityBorrowed": 0,
-          "status": "available"
-      },
-      {
-          "id": 5,
-          "categoryId": 4,
-          "name": "evwbt",
-          "quanttity": 20,
-          "quantityBorrowed": 0,
-          "status": "available"
-      },
-      {
-          "id": 6,
-          "categoryId": 5,
-          "name": "ưveewv",
-          "quanttity": 20,
-          "quantityBorrowed": 0,
-          "status": "available"
-      }
+    {
+      "id": 1,
+      "categoryId": 1,
+      "name": "Angular Programming",
+      "quanttity": 20,
+      "quantityBorrowed": 1,
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "name": "fdvfvd",
+      "quanttity": 20,
+      "quantityBorrowed": 1,
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "categoryId": 2,
+      "name": "dvvsvsdv",
+      "quanttity": 20,
+      "quantityBorrowed": 1,
+      "status": "available"
+    },
+    {
+      "id": 4,
+      "categoryId": 3,
+      "name": "dsvegv",
+      "quanttity": 20,
+      "quantityBorrowed": 0,
+      "status": "available"
+    },
+    {
+      "id": 5,
+      "categoryId": 4,
+      "name": "evwbt",
+      "quanttity": 20,
+      "quantityBorrowed": 0,
+      "status": "available"
+    },
+    {
+      "id": 6,
+      "categoryId": 5,
+      "name": "ưveewv",
+      "quanttity": 20,
+      "quantityBorrowed": 0,
+      "status": "available"
+    }
   ],
   "borrow": [
-      { "id": 1, "borrowName":"Nguyen Van A", "bookId": 1, "categoryId": 1,"borrowDate": "2023-12-26", "dueDate": "2023-12-29", "status":"Returned"},
-      { "id": 2, "borrowName":"Nguyen Van A", "bookId": 2, "categoryId": 1, "borrowDate": "2023-12-26", "dueDate": "", "status":"Borrowing"},
-      { "id": 3, "borrowName":"Nguyen Van B", "bookId": 1, "categoryId": 1, "borrowDate": "2023-12-27", "dueDate": "", "status":"Borrowing"},
-      { "id": 4, "borrowName":"Nguyen Van C", "bookId": 3, "categoryId": 2, "borrowDate": "2023-12-28", "dueDate": "", "status":"Borrowing"}
+    {
+      "id": 1,
+      "borrowName": "Nguyen Van A",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2023-12-26",
+      "dueDate": "2023-12-29",
+      "status": "Returned"
+    },
+    {
+      "id": 2,
+      "borrowName": "Nguyen Van A",
+      "bookId": 2,
+      "categoryId": 1,
+      "borrowDate": "2023-12-26",
+      "dueDate": "",
+      "status": "Borrowing"
+    },
+    {
+      "id": 3,
+      "borrowName": "Nguyen Van B",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2023-12-27",
+      "dueDate": "",
+      "status": "Borrowing"
+    },
+    {
+      "id": 4,
+      "borrowName": "Nguyen Van C",
+      "bookId": 3,
+      "categoryId": 2,
+      "borrowDate": "2023-12-28",
+      "dueDate": "",
+      "status": "Borrowing"
+    }
   ]
 }

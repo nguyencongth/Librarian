@@ -1,13 +1,14 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -20,18 +21,18 @@ import { OnInit } from '@angular/core';
     MatDividerModule,
     MatButtonModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   templateUrl: './book.component.html',
   styleUrl: './book.component.css'
 })
 export class BookComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'categoryId', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
-  data: any[] =[];
+  data: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private route: Router) { }
   ngOnInit(): void {
     this.fetchData();
   }
@@ -58,9 +59,13 @@ export class BookComponent implements OnInit, AfterViewInit {
     const url = 'http://localhost:3000/books'
     console.log("log")
     this.http.delete(`${url}/${id}`)
-    .subscribe((res: any) => {
-      console.log(res)
-    })
+      .subscribe((res: any) => {
+        console.log(res)
+      })
     this.fetchData();
+  }
+
+  navigateToDetail(id: number) {
+    this.route.navigate(['/dashboard/books', id]);
   }
 }

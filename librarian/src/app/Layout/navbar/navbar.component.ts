@@ -9,8 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterOutlet } from '@angular/router';
 import { BookComponent } from '../book/book.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +25,7 @@ import { BookComponent } from '../book/book.component';
     MatIconModule,
     AsyncPipe,
     MatMenuModule,
-    RouterOutlet,
+    RouterModule,
     BookComponent
   ]
 })

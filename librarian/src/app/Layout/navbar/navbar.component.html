@@ -1,13 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="dashboard" [routerLink]="['/dashboard']">Dashboard</mat-toolbar>
     <mat-nav-list>
-      <!-- <a mat-list-item href="#">Manager Books</a>
-      <a mat-list-item href="#">Manager Categories</a>
-      <a mat-list-item href="#">Manager Borrows</a> -->
       <button mat-button [matMenuTriggerFor]="book">
         <div class="valign-center">
           <mat-icon>bookmark</mat-icon>
@@ -16,71 +11,29 @@
         </div>
       </button>
       <mat-menu #book="matMenu">
-        <button mat-menu-item>
+        <a mat-menu-item>
           <div class="valign-center">
             Create
             <div>
               <i class="material-icons">add</i>
             </div>
           </div>
-        </button>
-        <button mat-menu-item>Manager</button>
-      </mat-menu>
-
-      <button mat-button [matMenuTriggerFor]="book">
-        <div class="valign-center">
-          <mat-icon>bookmark</mat-icon>
-          Manager Categories
-          <span><i class="material-icons">arrow_drop_down</i></span>
-        </div>
-      </button>
-      <mat-menu #book="matMenu">
-        <button mat-menu-item>
-          <div class="valign-center">
-            Create
-            <div>
-              <i class="material-icons">add</i>
-            </div>
-          </div>
-        </button>
-        <button mat-menu-item>Manager</button>
-      </mat-menu>
-
-      <button mat-button [matMenuTriggerFor]="book">
-        <div class="valign-center">
-          <mat-icon>bookmark</mat-icon>
-          Manager Borrows
-          <span><i class="material-icons">arrow_drop_down</i></span>
-        </div>
-      </button>
-      <mat-menu #book="matMenu">
-        <button mat-menu-item>
-          <div class="valign-center">
-            Create
-            <div>
-              <i class="material-icons">add</i>
-            </div>
-          </div>
-        </button>
-        <button mat-menu-item>Manager</button>
+        </a>
+        <a mat-menu-item [routerLink]="['/dashboard/books']">Manager</a>
       </mat-menu>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
       }
       <span>Librarian</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <app-book></app-book>
-    <!-- <router-outlet></router-outlet> -->
+    <!-- <app-book></app-book> -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
