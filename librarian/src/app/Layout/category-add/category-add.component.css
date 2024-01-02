@@ -1,0 +1,21 @@
+.form-add {
+    background-color: azure;
+    width: 550px;
+    margin: 150px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 48px 32px;
+}
+
+.form-add .title {
+    text-align: center;
+}
+.formInput {
+    width: 100%;
+}
+
+.btnAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

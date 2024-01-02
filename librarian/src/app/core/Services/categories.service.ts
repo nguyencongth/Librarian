@@ -13,5 +13,14 @@ export class CategoriesService {
   category(): Observable<any[]> {
     return this.http.get<any[]>(this.urlApi);
   }
+  getCategoryById(id: number) : Observable<any[]> {
+    return this.http.get<any[]>(`${this.urlApi}/${id}`);
+  }
+  updateCategory(bookCategory: any): Observable<any> {
+    return this.http.patch(`${this.urlApi}/${bookCategory.id}`, bookCategory);
+  }
+  addCategory(newCategory: any): Observable<any> {
+    return this.http.post<any>(`${this.urlApi}`, newCategory);
+  }
 
 }
