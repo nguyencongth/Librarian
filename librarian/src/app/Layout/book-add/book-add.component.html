@@ -1,1 +1,35 @@
-<p>book-add works!</p>
+<div class="container">
+  <div class="form-add">
+    <h2 class="title">Book Add</h2>
+    <form class="example-form" [formGroup]="bookForm" (ngSubmit)="Add()">
+        <mat-form-field class="formInput">
+            <mat-label>Id</mat-label>
+            <input matInput name="id" formControlName="id" [(ngModel)]="newBook.id">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="formInput">
+          <mat-label>Name</mat-label>
+          <input matInput name="name" formControlName="name" [(ngModel)]="newBook.name">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="formInput">
+            <mat-label>Select a category</mat-label>
+            <mat-select name="category" formControlName="categoryId" [(ngModel)]="newBook.categoryId">
+              <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <br>
+        <mat-form-field class="formInput">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" name="quantity" formControlName="quantity" [(ngModel)]="newBook.quantity">
+        </mat-form-field>
+        <br>
+        <div class="btnAdd">
+          <button type="submit" mat-raised-button color="primary">
+            Add
+          </button>
+        </div>
+    </form>
+  </div>
+</div>
+  

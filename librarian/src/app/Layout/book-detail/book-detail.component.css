@@ -11,3 +11,24 @@
 td {
     padding-right: 8px;
 }
+.detail {
+    background-color: azure;
+    width: 550px;
+    margin: 150px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 48px 32px;
+}
+
+.detail .title {
+    text-align: center;
+}
+.formInput {
+    width: 100%;
+}
+
+.btnSave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

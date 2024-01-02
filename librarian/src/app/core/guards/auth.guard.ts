@@ -1,3 +1,4 @@
+
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
 import { Injectable, inject } from '@angular/core';
@@ -6,9 +7,9 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root'
 })
 export class PermissionsService {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
   canActivate() {
-    return this.authService.isLoggedIn();
+    return this.authService.isLoggedIn() ? true : this.router.navigate(['/login']);
   }
 }
 

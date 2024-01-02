@@ -35,15 +35,17 @@
       "name": "Angular Programming",
       "quanttity": 20,
       "quantityBorrowed": 1,
-      "status": "available"
+      "status": "available",
+      "quantity": 20
     },
     {
       "id": 2,
       "categoryId": 1,
-      "name": "fdvfvd",
+      "name": "Javascript",
       "quanttity": 20,
       "quantityBorrowed": 1,
-      "status": "available"
+      "status": "available",
+      "quantity": 20
     },
     {
       "id": 3,
@@ -51,7 +53,8 @@
       "name": "dvvsvsdv",
       "quanttity": 20,
       "quantityBorrowed": 1,
-      "status": "available"
+      "status": "available",
+      "quantity": 20
     },
     {
       "id": 4,
@@ -59,7 +62,8 @@
       "name": "dsvegv",
       "quanttity": 20,
       "quantityBorrowed": 0,
-      "status": "available"
+      "status": "available",
+      "quantity": 10
     },
     {
       "id": 5,
@@ -67,7 +71,8 @@
       "name": "evwbt",
       "quanttity": 20,
       "quantityBorrowed": 0,
-      "status": "available"
+      "status": "available",
+      "quantity": 10
     },
     {
       "id": 6,
@@ -75,7 +80,22 @@
       "name": "ưveewv",
       "quanttity": 20,
       "quantityBorrowed": 0,
-      "status": "available"
+      "status": "available",
+      "quantity": 10
+    },
+    {
+      "id": "7",
+      "categoryId": 1,
+      "name": "tttt",
+      "quantity": 10,
+      "quantityBorrowed": 0
+    },
+    {
+      "id": "8",
+      "categoryId": 2,
+      "name": "gggggg",
+      "quantity": 12,
+      "quantityBorrowed": 0
     }
   ],
   "borrow": [

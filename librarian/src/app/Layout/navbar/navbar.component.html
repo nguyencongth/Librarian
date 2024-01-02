@@ -2,6 +2,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="dashboard" [routerLink]="['/dashboard']">Dashboard</mat-toolbar>
+    <!-- Start Book -->
     <mat-nav-list>
       <button mat-button [matMenuTriggerFor]="book">
         <div class="valign-center">
@@ -11,7 +12,7 @@
         </div>
       </button>
       <mat-menu #book="matMenu">
-        <a mat-menu-item>
+        <a mat-menu-item [routerLink]="['/dashboard/addBook']">
           <div class="valign-center">
             Create
             <div>
@@ -22,6 +23,29 @@
         <a mat-menu-item [routerLink]="['/dashboard/books']">Manager</a>
       </mat-menu>
     </mat-nav-list>
+  <!-- End Book -->
+  <!-- Start Category -->
+    <mat-nav-list>
+      <button mat-button [matMenuTriggerFor]="category">
+        <div class="valign-center">
+          <mat-icon>bookmark</mat-icon>
+          Manager Categories
+          <span><i class="material-icons">arrow_drop_down</i></span>
+        </div>
+      </button>
+      <mat-menu #category="matMenu">
+        <a mat-menu-item [routerLink]="['/dashboard/addBook']">
+          <div class="valign-center">
+            Create
+            <div>
+              <i class="material-icons">add</i>
+            </div>
+          </div>
+        </a>
+        <a mat-menu-item [routerLink]="['/dashboard/books']">Manager</a>
+      </mat-menu>
+    </mat-nav-list>
+    <!-- End Category -->
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
