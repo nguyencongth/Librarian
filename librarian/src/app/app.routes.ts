@@ -8,9 +8,10 @@ import { canActivateAuth } from './core/guards/auth.guard';
 import { CategoryComponent } from './Layout/category/category.component';
 import { CategoryAddComponent } from './Layout/category-add/category-add.component';
 import { CategoryDetailComponent } from './Layout/category-detail/category-detail.component';
+import { BorrowComponent } from './Layout/borrow/borrow.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full', title:'Login' },
+    { path: '', redirectTo: '/login', pathMatch: 'full', title: 'Login' },
     { path: 'login', component: LoginComponent, title: 'Login' },
     {
         path: 'dashboard',
@@ -37,6 +38,11 @@ export const routes: Routes = [
                 path: 'addCategory',
                 component: CategoryAddComponent,
                 title: 'Add Category',
+            },
+            {
+                path: 'borrows',
+                component: BorrowComponent,
+                title: 'Borrow Manager'
             },
         ]
     },

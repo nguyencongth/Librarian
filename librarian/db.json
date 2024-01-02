@@ -37,55 +37,49 @@
       "id": 1,
       "categoryId": 1,
       "name": "Angular Programming",
-      "quanttity": 20,
+      "quantity": 20,
       "quantityBorrowed": 1,
-      "status": "available",
-      "quantity": 20
+      "status": "available"
     },
     {
       "id": 2,
       "categoryId": 1,
       "name": "Javascript",
-      "quanttity": 20,
-      "quantityBorrowed": 1,
-      "status": "available",
-      "quantity": 20
+      "quantity": 21,
+      "quantityBorrowed": 0,
+      "status": "available"
     },
     {
       "id": 3,
       "categoryId": 2,
       "name": "dvvsvsdv",
-      "quanttity": 20,
+      "quantity": 20,
       "quantityBorrowed": 1,
-      "status": "available",
-      "quantity": 20
+      "status": "available"
     },
     {
       "id": 4,
       "categoryId": 3,
       "name": "dsvegv",
-      "quanttity": 20,
+      "quantity": 20,
       "quantityBorrowed": 0,
-      "status": "available",
-      "quantity": 10
+      "status": "available"
     },
     {
       "id": 5,
       "categoryId": 4,
       "name": "evwbt",
-      "quanttity": 20,
+      "quantity": 20,
       "quantityBorrowed": 0,
-      "status": "available",
-      "quantity": 10
+      "status": "available"
     },
     {
       "id": 6,
       "categoryId": 5,
       "name": "ưveewv",
-      "quanttity": 20,
+      "quantity": 20,
       "quantityBorrowed": 0,
-      "status": "available",
-      "quantity": 10
+      "status": "available"
     },
     {
       "id": "7",
@@ -118,8 +112,8 @@
       "bookId": 2,
       "categoryId": 1,
       "borrowDate": "2023-12-26",
-      "dueDate": "",
-      "status": "Borrowing"
+      "dueDate": "2024-01-02T17:12:18.323Z",
+      "status": "Returned"
     },
     {
       "id": 3,

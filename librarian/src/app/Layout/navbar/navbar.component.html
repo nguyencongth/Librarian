@@ -23,8 +23,8 @@
         <a mat-menu-item [routerLink]="['/dashboard/books']">Manager</a>
       </mat-menu>
     </mat-nav-list>
-  <!-- End Book -->
-  <!-- Start Category -->
+    <!-- End Book -->
+    <!-- Start Category -->
     <mat-nav-list>
       <button mat-button [matMenuTriggerFor]="category">
         <div class="valign-center">
@@ -46,6 +46,20 @@
       </mat-menu>
     </mat-nav-list>
     <!-- End Category -->
+    <!-- Start Borrow -->
+    <mat-nav-list>
+      <button mat-button [matMenuTriggerFor]="borrow">
+        <div class="valign-center">
+          <mat-icon>bookmark</mat-icon>
+          Manager Categories
+          <span><i class="material-icons">arrow_drop_down</i></span>
+        </div>
+      </button>
+      <mat-menu #borrow="matMenu">
+        <a mat-menu-item [routerLink]="['/dashboard/borrows']">Manager</a>
+      </mat-menu>
+    </mat-nav-list>
+    <!-- End Borrow -->
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
