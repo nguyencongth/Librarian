@@ -40,30 +40,28 @@ export class DialogBorrowComponent implements OnInit {
     private bookService: BookService, 
     public dialog: MatDialog,
     private route: Router
-  ) {
-    console.log(data);
-  }
+  ) {}
   ngOnInit(): void {
     this.dataBook = this.data;
   }
 
   borrow(): void {
     this.dialog.closeAll();
-      this.borrowService.addBorrow(this.newBorrow).subscribe((data:any)=>{
-        this.newBorrow = data;
+    this.borrowService.addBorrow(this.newBorrow).subscribe((data:any)=>{
+      this.newBorrow = data;
+      
+      this.bookService.getBookById(this.newBorrow.bookId).subscribe((book: any)=>{
+
+        const currentBookQuantity = book.quantity || 0;
+        const newBookQuantity = currentBookQuantity - 1;
+        this.bookService.updateBookQuantity(this.newBorrow.bookId, newBookQuantity).subscribe();
         
-        this.bookService.getBookById(this.newBorrow.bookId).subscribe((book: any)=>{
-  
-          const currentBookQuantity = book.quantity || 0;
-          const newBookQuantity = currentBookQuantity - 1;
-          this.bookService.updateBookQuantity(this.newBorrow.bookId, newBookQuantity).subscribe();
-          
-          const currentQuantityBorrow = book.quantityBorrowed;
-          const newQuantityBorrowed = currentQuantityBorrow + 1;
-          this.bookService.updateBookQuantityBorrowed(this.newBorrow.bookId, newQuantityBorrowed).subscribe();
-        })
-        window.alert("Borrow successfully");
-        this.route.navigate(['/dashboard/borrows']);
+        const currentQuantityBorrow = book.quantityBorrowed;
+        const newQuantityBorrowed = currentQuantityBorrow + 1;
+        this.bookService.updateBookQuantityBorrowed(this.newBorrow.bookId, newQuantityBorrowed).subscribe();
       })
+      window.alert("Borrow successfully");
+      this.route.navigate(['/dashboard/borrows']);
+    })
   }
 }

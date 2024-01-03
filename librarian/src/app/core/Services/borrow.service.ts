@@ -9,6 +9,11 @@ export class BorrowService {
 
   constructor(private http: HttpClient) { }
   private urlApi = 'http://localhost:3000/borrow';
+
+  getBorrow(): Observable<any> {
+    return this.http.get(this.urlApi);
+  }
+
   addBorrow(newBorrow: any): Observable<any> {
     return this.http.post(`${this.urlApi}`, newBorrow);
   }

@@ -23,7 +23,7 @@ import { NgFor } from '@angular/common';
   styleUrl: './category-add.component.css'
 })
 export class CategoryAddComponent {
-  newCategory: any = {id: '', name: ''};
+  newCategory: any = { name: ''};
   constructor(private categoryService: CategoriesService, private route: Router){}
   Add() {
     this.categoryService.addCategory(this.newCategory).subscribe((data) => {

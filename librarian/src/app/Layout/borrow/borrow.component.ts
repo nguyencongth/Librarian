@@ -8,8 +8,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { BookService } from '../../core/Services/book.service';
+import { BorrowService } from '../../core/Services/borrow.service';
 
 @Component({
   selector: 'app-borrow',
@@ -33,18 +33,18 @@ export class BorrowComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private bookService: BookService, private route: Router) { }
+  constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService) { }
   ngOnInit(): void {
-    this.fetchData();
+    this.getBorrowDate();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  fetchData() {
-    this.http.get('http://localhost:3000/borrow').subscribe((data: any) => {
-      this.data = data;
+  getBorrowDate() {
+    this.borrowService.getBorrow().subscribe((borrow: any)=>{
+      this.data = borrow;
       this.dataSource.data = this.data;
-    });
+    })
   }
 
   applyFilter(event: Event) {
@@ -67,23 +67,14 @@ export class BorrowComponent implements OnInit, AfterViewInit {
 
           this.bookService.getBookById(updateRow.bookId)
             .subscribe((book: any) => {
-              console.log(book);
 
               const currentBookQuantity = book.quantity || 0;
-
               const newBookQuantity = currentBookQuantity + 1;
-
-              this.bookService.updateBookQuantity(updateRow.bookId, newBookQuantity)
-                .subscribe((res: any) => {
-                  console.log(res);
-                })
+              this.bookService.updateBookQuantity(updateRow.bookId, newBookQuantity).subscribe()
               
               const currentQuantityBorrow = book.quantityBorrowed;
               const newQuantityBorrowed = currentQuantityBorrow - 1;
-              this.bookService.updateBookQuantityBorrowed(updateRow.bookId, newQuantityBorrowed)
-                .subscribe((res: any) => {
-                  console.log(res);
-                })
+              this.bookService.updateBookQuantityBorrowed(updateRow.bookId, newQuantityBorrowed).subscribe()
             })
         }
       })

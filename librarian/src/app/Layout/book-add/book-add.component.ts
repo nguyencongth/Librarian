@@ -5,7 +5,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { BookService } from '../../core/Services/book.service';
 import { Router } from '@angular/router';
-import { Book } from '../../core/interfaces/book';
 import { FormBuilder, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoriesService } from '../../core/Services/categories.service';
 import { NgFor } from '@angular/common';
@@ -35,16 +34,17 @@ export class BookAddComponent implements OnInit {
   categories: any[] = [];
   newBook: any = { categoryId: '', name: '', quantity: '', quantityBorrowed: 0};
   constructor(private bookService: BookService, private categoryService: CategoriesService, private formBuilder: FormBuilder, private route: Router){}
+
   ngOnInit(): void {
     this.getCategory()
   }
+
   getCategory(): void {
     this.categoryService.category().subscribe((data: any[]) => {
-      this.categories = data;
-      console.log(this.categories);
-      
+      this.categories = data;  
     })
   }
+
   Add() {
     this.bookService.addBook(this.newBook).subscribe((data) => {
       this.newBook = data;

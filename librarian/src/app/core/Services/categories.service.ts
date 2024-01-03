@@ -22,5 +22,7 @@ export class CategoriesService {
   addCategory(newCategory: any): Observable<any> {
     return this.http.post<any>(`${this.urlApi}`, newCategory);
   }
-
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.urlApi}/${id}`)
+  }
 }

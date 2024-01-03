@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriesService } from '../../core/Services/categories.service';
 
 @Component({
   selector: 'app-category',
@@ -32,18 +33,21 @@ export class CategoryComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private route: Router, private categoryService: CategoriesService) { }
+  
   ngOnInit(): void {
-    this.fetchData();
+    this.getCategoriesData();
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  fetchData() {
-    this.http.get('http://localhost:3000/category').subscribe((data: any) => {
-      this.data = data;
+
+  getCategoriesData() {
+    this.categoryService.category().subscribe((category: any)=>{
+      this.data = category;
       this.dataSource.data = this.data;
-    });
+    })
   }
 
   applyFilter(event: Event) {
@@ -56,13 +60,10 @@ export class CategoryComponent implements OnInit, AfterViewInit {
   }
 
   deleteCategory(id: number) {
-    const url = 'http://localhost:3000/category'
-    console.log("log")
-    this.http.delete(`${url}/${id}`)
-      .subscribe((res: any) => {
-        console.log(res)
-      })
-    this.fetchData();
+    if(window.confirm('Are you sure you want to delete')){
+      this.categoryService.deleteCategory(id).subscribe();
+      this.getCategoriesData();
+    } else return;
   }
 
   navigateToDetail(id: number) {

@@ -31,24 +31,24 @@ export class BookDetailComponent implements OnInit {
   };
   categories: any[] = [];
   constructor(private bookService: BookService, private categoryService: CategoriesService,private router: ActivatedRoute, private route:Router) {}
+  
   ngOnInit(): void {
     this.bookDetail();
     this.getCategory();
   }
+
   bookDetail(): void {
     this.router.params.subscribe(params => {
       const bookId = params['id'];
       this.bookService.getBookById(bookId).subscribe((data: any) => {
         this.book = data;
-        console.log(this.book);
       })
     })
   }
+
   getCategory(): void {
     this.categoryService.category().subscribe((data: any[]) => {
       this.categories = data;
-      console.log(this.categories);
-      
     })
   }
 

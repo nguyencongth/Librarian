@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -35,18 +35,19 @@ export class BookComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private bookService: BookService, private route: Router, public dialog: MatDialog) { }
+  constructor(private bookService: BookService, private route: Router, public dialog: MatDialog) { }
   ngOnInit(): void {
-    this.fetchData();
+    this.getBookData();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  fetchData() {
-    this.http.get('http://localhost:3000/books').subscribe((data: any) => {
-      this.data = data;
-      this.dataSource.data = this.data;
-    });
+
+  getBookData() {
+    this.bookService.getBook().subscribe((book: any)=>{
+        this.data = book;
+        this.dataSource.data = this.data;
+    })
   }
 
   applyFilter(event: Event) {
@@ -61,7 +62,7 @@ export class BookComponent implements OnInit, AfterViewInit {
   deleteBook(id: number): void {
     if( window.confirm('Are you sure you want to delete?')) {
       this.bookService.deleteBook(id).subscribe();
-      this.fetchData();
+      this.getBookData();
     } else return;
    
   }
