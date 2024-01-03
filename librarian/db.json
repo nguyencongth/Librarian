@@ -37,16 +37,16 @@
       "id": 1,
       "categoryId": 1,
       "name": "Angular Programming",
-      "quantity": 20,
-      "quantityBorrowed": 1,
+      "quantity": 17,
+      "quantityBorrowed": 4,
       "status": "available"
     },
     {
       "id": 2,
       "categoryId": 1,
       "name": "Javascript",
-      "quantity": 21,
-      "quantityBorrowed": 0,
+      "quantity": 20,
+      "quantityBorrowed": 1,
       "status": "available"
     },
     {
@@ -58,42 +58,25 @@
       "status": "available"
     },
     {
-      "id": 4,
-      "categoryId": 3,
-      "name": "dsvegv",
-      "quantity": 20,
-      "quantityBorrowed": 0,
-      "status": "available"
-    },
-    {
-      "id": 5,
-      "categoryId": 4,
-      "name": "evwbt",
-      "quantity": 20,
-      "quantityBorrowed": 0,
-      "status": "available"
-    },
-    {
-      "id": 6,
-      "categoryId": 5,
-      "name": "ưveewv",
-      "quantity": 20,
-      "quantityBorrowed": 0,
-      "status": "available"
-    },
-    {
-      "id": "7",
       "categoryId": 1,
-      "name": "tttt",
+      "name": "C Sharp",
       "quantity": 10,
-      "quantityBorrowed": 0
+      "quantityBorrowed": 0,
+      "id": 6
     },
     {
-      "id": "8",
-      "categoryId": 2,
-      "name": "gggggg",
+      "categoryId": 5,
+      "name": "abcd",
       "quantity": 12,
-      "quantityBorrowed": 0
+      "quantityBorrowed": 0,
+      "id": 7
+    },
+    {
+      "categoryId": 5,
+      "name": "qwer",
+      "quantity": 10,
+      "quantityBorrowed": 0,
+      "id": 8
     }
   ],
   "borrow": [
@@ -112,7 +95,7 @@
       "bookId": 2,
       "categoryId": 1,
       "borrowDate": "2023-12-26",
-      "dueDate": "2024-01-02T17:12:18.323Z",
+      "dueDate": "1/3/2024",
       "status": "Returned"
     },
     {
@@ -121,8 +104,8 @@
       "bookId": 1,
       "categoryId": 1,
       "borrowDate": "2023-12-27",
-      "dueDate": "",
-      "status": "Borrowing"
+      "dueDate": "2024-01-03T01:48:06.571Z",
+      "status": "Returned"
     },
     {
       "id": 4,
@@ -132,6 +115,69 @@
       "borrowDate": "2023-12-28",
       "dueDate": "",
       "status": "Borrowing"
+    },
+    {
+      "borrowName": "Nguyen Cong Thanh",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "1/3/2024",
+      "status": "Returned",
+      "id": 5
+    },
+    {
+      "borrowName": "ABCD",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "1/3/2024",
+      "status": "Returned",
+      "id": 6
+    },
+    {
+      "borrowName": "BBBBBBBBBBBBBB",
+      "bookId": 2,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 7
+    },
+    {
+      "borrowName": "No Name",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 8
+    },
+    {
+      "borrowName": "Tuan Truong Van",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "k trả",
+      "status": "Ghim",
+      "id": 9
+    },
+    {
+      "borrowName": "sdfsdfsdfsd",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 10
+    },
+    {
+      "borrowName": "rrrrrrrrrr",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "1/3/2024",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 11
     }
   ]
 }

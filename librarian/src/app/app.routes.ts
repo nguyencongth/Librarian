@@ -9,6 +9,7 @@ import { CategoryComponent } from './Layout/category/category.component';
 import { CategoryAddComponent } from './Layout/category-add/category-add.component';
 import { CategoryDetailComponent } from './Layout/category-detail/category-detail.component';
 import { BorrowComponent } from './Layout/borrow/borrow.component';
+import { DialogBorrowComponent } from './Layout/dialog-borrow/dialog-borrow.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full', title: 'Login' },

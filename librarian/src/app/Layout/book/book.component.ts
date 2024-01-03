@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBorrowComponent } from '../dialog-borrow/dialog-borrow.component';
+import { BookService } from '../../core/Services/book.service';
 
 @Component({
   selector: 'app-book',
@@ -32,7 +35,7 @@ export class BookComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private http: HttpClient, private bookService: BookService, private route: Router, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.fetchData();
   }
@@ -55,17 +58,24 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
   }
 
-  deleteUser(id: number) {
-    const url = 'http://localhost:3000/books'
-    console.log("log")
-    this.http.delete(`${url}/${id}`)
-      .subscribe((res: any) => {
-        console.log(res)
-      })
-    this.fetchData();
+  deleteBook(id: number): void {
+    if( window.confirm('Are you sure you want to delete?')) {
+      this.bookService.deleteBook(id).subscribe();
+      this.fetchData();
+    } else return;
+   
   }
 
   navigateToDetail(id: number) {
     this.route.navigate(['/dashboard/books', id]);
+  }
+
+  openDialog(id: number): void {
+    const selectedItem = this.dataSource.data.find(book => book.id === id); 
+    if (selectedItem) {
+        this.dialog.open(DialogBorrowComponent, {
+        data: selectedItem
+      });    
+    }
   }
 }

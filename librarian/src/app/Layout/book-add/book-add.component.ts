@@ -27,14 +27,13 @@ import { NgFor } from '@angular/common';
 })
 export class BookAddComponent implements OnInit {
   bookForm = this.formBuilder.group({
-    id: ['', Validators.required],
     name: ['', Validators.required],
     categoryId: ['', Validators.required],
     quantity: ['', Validators.required]
   })
 
   categories: any[] = [];
-  newBook: any = {id: '', categoryId: '', name: '', quantity: '', quantityBorrowed: 0};
+  newBook: any = { categoryId: '', name: '', quantity: '', quantityBorrowed: 0};
   constructor(private bookService: BookService, private categoryService: CategoriesService, private formBuilder: FormBuilder, private route: Router){}
   ngOnInit(): void {
     this.getCategory()

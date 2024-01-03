@@ -3,11 +3,6 @@
     <h2 class="title">Book Add</h2>
     <form class="example-form" [formGroup]="bookForm" (ngSubmit)="Add()">
         <mat-form-field class="formInput">
-            <mat-label>Id</mat-label>
-            <input matInput name="id" formControlName="id" [(ngModel)]="newBook.id">
-        </mat-form-field>
-        <br>
-        <mat-form-field class="formInput">
           <mat-label>Name</mat-label>
           <input matInput name="name" formControlName="name" [(ngModel)]="newBook.name">
         </mat-form-field>

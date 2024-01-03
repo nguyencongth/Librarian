@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Book } from '../interfaces/book';
 
 @Injectable({
@@ -25,5 +25,7 @@ export class BookService {
   updateBookQuantityBorrowed(bookId: number, newQuantityBorrowed: number): Observable<any> {
     return this.http.patch(`${this.urlApi}/${bookId}`, { quantityBorrowed: newQuantityBorrowed });
   }
-
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(`${this.urlApi}/${id}`)
+  }
 }

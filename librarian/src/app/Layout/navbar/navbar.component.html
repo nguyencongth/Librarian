@@ -1,12 +1,15 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class="dashboard" [routerLink]="['/dashboard']">Dashboard</mat-toolbar>
+    <mat-toolbar class="dashboard" [routerLink]="['/dashboard']">
+      <mat-icon>home</mat-icon>
+      Dashboard
+    </mat-toolbar>
     <!-- Start Book -->
-    <mat-nav-list>
+    <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="book">
         <div class="valign-center">
-          <mat-icon>bookmark</mat-icon>
+          <mat-icon>library_books</mat-icon>
           Manager Books
           <span><i class="material-icons">arrow_drop_down</i></span>
         </div>
@@ -25,10 +28,10 @@
     </mat-nav-list>
     <!-- End Book -->
     <!-- Start Category -->
-    <mat-nav-list>
+    <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="category">
         <div class="valign-center">
-          <mat-icon>bookmark</mat-icon>
+          <mat-icon>category</mat-icon>
           Manager Categories
           <span><i class="material-icons">arrow_drop_down</i></span>
         </div>
@@ -47,11 +50,11 @@
     </mat-nav-list>
     <!-- End Category -->
     <!-- Start Borrow -->
-    <mat-nav-list>
+    <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="borrow">
         <div class="valign-center">
-          <mat-icon>bookmark</mat-icon>
-          Manager Categories
+          <mat-icon>calendar_month</mat-icon>
+          Manager Borrows
           <span><i class="material-icons">arrow_drop_down</i></span>
         </div>
       </button>

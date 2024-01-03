@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Dialog Book Borrow</h1>
+<div mat-dialog-content>
+    <form class="example-form">
+        <mat-form-field class="formInput">
+            <mat-label>BookId</mat-label>
+            <input matInput name="BookId" [(ngModel)]="dataBook.id">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="formInput">
+          <mat-label>CategoryId</mat-label>
+          <input matInput name="CategoryId" [(ngModel)]="dataBook.categoryId">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="formInput">
+          <mat-label>BorrowName</mat-label>
+          <input matInput name="BorrowName" [(ngModel)]="newBorrow.borrowName">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-raised-button color="primary" (click)="borrow()">Borrow</button>
+</div>

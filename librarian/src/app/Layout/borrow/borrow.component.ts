@@ -56,7 +56,7 @@ export class BorrowComponent implements OnInit, AfterViewInit {
     }
   }
   returnBook(row: any) {
-    row.dueDate = new Date().toISOString();
+    row.dueDate = new Date().toLocaleDateString();
     row.status = 'Returned';
     this.http.patch(`http://localhost:3000/borrow/${row.id}`, { dueDate: row.dueDate, status: row.status })
       .subscribe((updateRow: any) => {
@@ -70,18 +70,17 @@ export class BorrowComponent implements OnInit, AfterViewInit {
               console.log(book);
 
               const currentBookQuantity = book.quantity || 0;
-              console.log(currentBookQuantity);
 
-              const returnedQuantity = 1;
-              const newBookQuantity = currentBookQuantity + returnedQuantity;
-              console.log(newBookQuantity);
-
+              const newBookQuantity = currentBookQuantity + 1;
 
               this.bookService.updateBookQuantity(updateRow.bookId, newBookQuantity)
                 .subscribe((res: any) => {
                   console.log(res);
                 })
-              this.bookService.updateBookQuantityBorrowed(updateRow.bookId, 0)
+              
+              const currentQuantityBorrow = book.quantityBorrowed;
+              const newQuantityBorrowed = currentQuantityBorrow - 1;
+              this.bookService.updateBookQuantityBorrowed(updateRow.bookId, newQuantityBorrowed)
                 .subscribe((res: any) => {
                   console.log(res);
                 })

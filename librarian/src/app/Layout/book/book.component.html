@@ -51,8 +51,8 @@
         <button style="margin-right: 4px;" mat-raised-button color="primary" (click)="navigateToDetail(element.id)">
           Detail
         </button>
-        <button style="margin-right: 4px;" mat-raised-button color="warn" (click)="deleteUser(element.id)">Delete</button>
-        <button mat-raised-button>Borrow</button>
+        <button style="margin-right: 4px;" mat-raised-button color="warn" (click)="deleteBook(element.id)" [disabled]="element.quantityBorrowed > 0">Delete</button>
+        <button mat-raised-button (click)="openDialog(element.id)">Borrow</button>
       </td>
     </ng-container>
 

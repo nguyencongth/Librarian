@@ -17,7 +17,7 @@
 }
 
 .valign-center {
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 
@@ -27,4 +27,7 @@ button {
 
 .dashboard {
   cursor: pointer;
+}
+.mat-list {
+  padding: 8px 16px;
 }
