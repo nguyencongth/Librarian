@@ -39,12 +39,7 @@
       "name": "Angular Programming",
       "quantity": 20,
       "quantityBorrowed": 1,
-<<<<<<< HEAD
-      "status": "available",
-      "quantity": 19
-=======
       "status": "available"
->>>>>>> be6027b3f1c47a6328686375006d5e3fc33fcd60
     },
     {
       "id": 2,
