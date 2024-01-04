@@ -76,8 +76,8 @@
     {
       "categoryId": 5,
       "name": "abcd",
-      "quantity": 10,
-      "quantityBorrowed": 0,
+      "quantity": 8,
+      "quantityBorrowed": 2,
       "status": "available",
       "id": 7
     },
@@ -239,6 +239,42 @@
       "dueDate": "1/3/2024",
       "status": "Returned",
       "id": 13
+    },
+    {
+      "borrowName": "eeeeeeeeeeeee",
+      "bookId": 7,
+      "categoryId": 5,
+      "borrowDate": "Thu Jan 04 2024",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 14
+    },
+    {
+      "borrowName": "vvvvvv",
+      "bookId": 7,
+      "categoryId": 5,
+      "borrowDate": "2024-01-04T09:58:45.119Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 15
+    },
+    {
+      "borrowName": "vbvbvbvbv",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "lúc 17:03:04 GMT+7 Thứ Năm, 4 tháng 1, 2024",
+      "dueDate": "1/4/2024",
+      "status": "Returned",
+      "id": 16
+    },
+    {
+      "borrowName": "tytytytyty",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2024-01-04T10:16:10.663Z",
+      "dueDate": "1/4/2024",
+      "status": "Returned",
+      "id": 17
     }
   ]
 }
