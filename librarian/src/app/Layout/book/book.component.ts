@@ -1,8 +1,10 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBorrowComponent } from '../dialog-borrow/dialog-borrow.component';
 import { BookService } from '../../core/Services/book.service';
+import { CategoriesService } from '../../core/Services/categories.service';
 
 @Component({
   selector: 'app-book',
@@ -21,6 +24,7 @@ import { BookService } from '../../core/Services/book.service';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSelectModule,
     MatDividerModule,
     MatButtonModule,
     HttpClientModule,
@@ -29,25 +33,50 @@ import { BookService } from '../../core/Services/book.service';
   templateUrl: './book.component.html',
   styleUrl: './book.component.css'
 })
-export class BookComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'categoryId', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
+export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
+  selected = '';
+  displayedColumns: string[] = ['position', 'categoryName', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
   data: any[] = [];
+  categoris: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private bookService: BookService, private route: Router, public dialog: MatDialog) { }
+  subscription = new Subscription();
+
+  constructor(private bookService: BookService, private categoryService: CategoriesService, private route: Router, public dialog: MatDialog) { }
+
   ngOnInit(): void {
     this.getBookData();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
+  getCategoryNames() {
+    this.data.forEach((book, index) => {
+      this.categoryService.getCategoryById(book.categoryId).subscribe((category: any) => {
+        this.data[index].categoryName = category.name;
+        this.dataSource.data = [...this.data];
+      });
+    });
+  }
   getBookData() {
-    this.bookService.getBook().subscribe((book: any)=>{
-        this.data = book;
-        this.dataSource.data = this.data;
+    this.subscription = this.bookService.getBook().subscribe((book: any)=>{
+      this.data = book;
+      this.dataSource.data = this.data;
+      this.getCategoryNames();   
     })
+  }
+
+  deleteBook(id: number): void {
+    if( window.confirm('Are you sure you want to delete?')) {
+      this.subscription = this.bookService.deleteBook(id).subscribe();
+      this.getBookData();
+    } else return;
+   
   }
 
   applyFilter(event: Event) {
@@ -57,14 +86,6 @@ export class BookComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  deleteBook(id: number): void {
-    if( window.confirm('Are you sure you want to delete?')) {
-      this.bookService.deleteBook(id).subscribe();
-      this.getBookData();
-    } else return;
-   
   }
 
   navigateToDetail(id: number) {

@@ -30,6 +30,14 @@
     {
       "name": "Tornado",
       "id": 6
+    },
+    {
+      "name": "Bombasto",
+      "id": 7
+    },
+    {
+      "name": "dfdgfdg",
+      "id": 8
     }
   ],
   "books": [
@@ -62,6 +70,7 @@
       "name": "C Sharp",
       "quantity": 9,
       "quantityBorrowed": 1,
+      "status": "available",
       "id": 6
     },
     {
@@ -69,6 +78,7 @@
       "name": "abcd",
       "quantity": 10,
       "quantityBorrowed": 0,
+      "status": "available",
       "id": 7
     },
     {
@@ -76,6 +86,7 @@
       "name": "qwer",
       "quantity": 10,
       "quantityBorrowed": 0,
+      "status": "available",
       "id": 8
     },
     {
@@ -83,7 +94,32 @@
       "name": "Typescript",
       "quantity": 10,
       "quantityBorrowed": 0,
+      "status": "available",
       "id": 9
+    },
+    {
+      "name": "HTML",
+      "categoryId": 1,
+      "quantity": 12,
+      "quantityBorrowed": 0,
+      "status": "available",
+      "id": 10
+    },
+    {
+      "name": "ttttt",
+      "categoryId": 1,
+      "quantity": "12",
+      "quantityBorrowed": 0,
+      "status": "available",
+      "id": 11
+    },
+    {
+      "name": "Try Hard",
+      "categoryId": 2,
+      "quantity": "12",
+      "quantityBorrowed": 0,
+      "status": "available",
+      "id": 12
     }
   ],
   "borrow": [

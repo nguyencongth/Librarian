@@ -1,26 +1,31 @@
 <div class="container">
   <div class="form-add">
     <h2 class="title">Book Add</h2>
-    <form class="example-form" [formGroup]="bookForm" (ngSubmit)="Add()">
+    <form class="example-form" [formGroup]="bookForm" (ngSubmit)="addBook()">
         <mat-form-field class="formInput">
           <mat-label>Name</mat-label>
-          <input matInput name="name" formControlName="name" [(ngModel)]="newBook.name">
+          <input matInput formControlName="name" required>
+          @if (bookForm.controls.name.invalid) {
+            <mat-error>{{getErrorMessage()}}</mat-error>
+          }
         </mat-form-field>
         <br>
         <mat-form-field class="formInput">
             <mat-label>Select a category</mat-label>
-            <mat-select name="category" formControlName="categoryId" [(ngModel)]="newBook.categoryId">
+            <mat-select name="category" formControlName="categoryId">
               <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
             </mat-select>
-          </mat-form-field>
+            <mat-error *ngIf="bookForm.controls.categoryId.invalid">Category is required</mat-error>
+        </mat-form-field>
         <br>
         <mat-form-field class="formInput">
           <mat-label>Quantity</mat-label>
-          <input matInput type="number" name="quantity" formControlName="quantity" [(ngModel)]="newBook.quantity">
+          <input matInput  name="quantity" formControlName="quantity" required>
+          <mat-error *ngIf="bookForm.controls.quantity.invalid">Quantity is required</mat-error>
         </mat-form-field>
         <br>
         <div class="btnAdd">
-          <button type="submit" mat-raised-button color="primary">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!bookForm.valid">
             Add
           </button>
         </div>

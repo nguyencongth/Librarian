@@ -17,8 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
-  @Input() username: string;
-  @Input() password: string;
+  username: string;
+  password: string;
 
   login(): void {
     if (!this.username || !this.password) {

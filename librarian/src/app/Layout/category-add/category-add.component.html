@@ -1,14 +1,15 @@
 <div class="container">
     <div class="form-add">
       <h2 class="title">Category Add</h2>
-      <form class="example-form" (ngSubmit)="Add()">
+      <form class="example-form" [formGroup]="categoryForm" (ngSubmit)="addCategory()">
           <mat-form-field class="formInput">
             <mat-label>Name</mat-label>
-            <input matInput name="name" [(ngModel)]="newCategory.name">
+            <input matInput name="name" formControlName="name">
+            <mat-error *ngIf="categoryForm.controls.name.invalid">Name is required</mat-error>
           </mat-form-field>
           <br>
           <div class="btnAdd">
-            <button type="submit" mat-raised-button color="primary">
+            <button type="submit" mat-raised-button color="primary" [disabled]="!categoryForm.valid">
               Add
             </button>
           </div>

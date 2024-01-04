@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../core/Services/categories.service';
+import { Subject, Subscription, interval, mergeMap, scan } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -27,13 +28,14 @@ import { CategoriesService } from '../../core/Services/categories.service';
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
-export class CategoryComponent implements OnInit, AfterViewInit {
+export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['id', 'name', 'actions'];
   data: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private route: Router, private categoryService: CategoriesService) { }
+  subscription  = new Subscription();
   
   ngOnInit(): void {
     this.getCategoriesData();
@@ -42,9 +44,12 @@ export class CategoryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   getCategoriesData() {
-    this.categoryService.category().subscribe((category: any)=>{
+    this.subscription = this.categoryService.category().subscribe((category: any)=>{
       this.data = category;
       this.dataSource.data = this.data;
     })

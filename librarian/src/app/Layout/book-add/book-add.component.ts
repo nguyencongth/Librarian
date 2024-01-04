@@ -7,7 +7,7 @@ import { BookService } from '../../core/Services/book.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoriesService } from '../../core/Services/categories.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-book-add',
@@ -19,7 +19,8 @@ import { NgFor } from '@angular/common';
     MatSelectModule,
     MatFormFieldModule,
     MatButtonModule,
-    NgFor
+    NgFor,
+    NgIf
   ],
   templateUrl: './book-add.component.html',
   styleUrl: './book-add.component.css'
@@ -28,11 +29,12 @@ export class BookAddComponent implements OnInit {
   bookForm = this.formBuilder.group({
     name: ['', Validators.required],
     categoryId: ['', Validators.required],
-    quantity: ['', Validators.required]
+    quantity: ['', Validators.required],
+    quantityBorrowed: 0,
+    status: ['available']
   })
 
   categories: any[] = [];
-  newBook: any = { categoryId: '', name: '', quantity: '', quantityBorrowed: 0};
   constructor(private bookService: BookService, private categoryService: CategoriesService, private formBuilder: FormBuilder, private route: Router){}
 
   ngOnInit(): void {
@@ -45,11 +47,17 @@ export class BookAddComponent implements OnInit {
     })
   }
 
-  Add() {
-    this.bookService.addBook(this.newBook).subscribe((data) => {
-      this.newBook = data;
+  addBook() {
+    this.bookService.addBook(this.bookForm.value).subscribe((data) => {
+      this.bookForm = data;
       window.alert("Add successfully");
       this.route.navigate(['/dashboard/books']);
     })
+  }
+
+  getErrorMessage() {
+    // console.log(this.bookForm);
+    
+    return this.bookForm.controls.name.hasError('required') ? 'Name is required' : '';
   }
 }

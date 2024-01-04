@@ -1,9 +1,28 @@
 <h3>Books list</h3>
+<!-- Filter -->
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
-
+<!-- Filter book name -->
+<mat-form-field>
+  <mat-label>Filter with book name</mat-label>
+  <input matInput placeholder="Ex. ium" #input>
+</mat-form-field>
+<!-- Filter category name -->
+<mat-form-field>
+  <mat-label>Filter with category name</mat-label>
+  <input matInput placeholder="Ex. ium" #input>
+</mat-form-field>
+<!-- Filter status -->
+<mat-form-field>
+  <mat-label>Filter with status</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option value="all">All</mat-option>
+    <mat-option value="available">Available</mat-option>
+    <mat-option value="runoutofbook">Run Out Of Book</mat-option>
+  </mat-select>
+</mat-form-field>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -15,9 +34,9 @@
     </ng-container>
 
     <!-- CategoryId Column -->
-    <ng-container matColumnDef="categoryId">
-      <th mat-header-cell *matHeaderCellDef> CategoryId </th>
-      <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef> Category Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
     </ng-container>
 
     <!-- Name Column -->
@@ -41,7 +60,7 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity > 0 ? 'Available' : 'Out of books'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.quantity > 0 ? 'available' : 'out of books'}} </td>
     </ng-container>
 
     <!-- Actions Column -->
