@@ -27,6 +27,11 @@ export class BookService {
   updateBookQuantityBorrowed(bookId: number, newQuantityBorrowed: number): Observable<any> {
     return this.http.patch(`${this.urlApi}/${bookId}`, { quantityBorrowed: newQuantityBorrowed });
   }
+  updateBookStatus(bookId: number, quantity: number): Observable<any> {
+    const status = quantity === 0 ? 'outOfStock' : 'available';
+
+    return this.http.patch(`${this.urlApi}/${bookId}`, { status });
+  }
   deleteBook(id: number): Observable<any> {
     return this.http.delete(`${this.urlApi}/${id}`)
   }

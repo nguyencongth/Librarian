@@ -6,7 +6,7 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -20,9 +20,9 @@ import { BookService } from '../../core/Services/book.service';
   standalone: true,
   imports: [
     FormsModule,
-    MatDialogTitle, 
-    MatDialogContent, 
-    MatDialogActions, 
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
     MatDialogClose,
     MatButtonModule,
     MatInputModule,
@@ -33,29 +33,29 @@ import { BookService } from '../../core/Services/book.service';
 })
 export class DialogBorrowComponent implements OnInit {
   dataBook: any;
-  newBorrow: any = {borrowName: '', bookId: this.data.id, categoryId: this.data.categoryId, borrowDate: new Date().toLocaleDateString(), dueDate: '', status: "Borrowing"}
+  newBorrow: any = { borrowName: '', bookId: this.data.id, categoryId: this.data.categoryId, borrowDate: new Date().toLocaleDateString(), dueDate: '', status: "Borrowing" }
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private borrowService: BorrowService,
-    private bookService: BookService, 
+    private bookService: BookService,
     public dialog: MatDialog,
     private route: Router
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.dataBook = this.data;
   }
 
   borrow(): void {
     this.dialog.closeAll();
-    this.borrowService.addBorrow(this.newBorrow).subscribe((data:any)=>{
+    this.borrowService.addBorrow(this.newBorrow).subscribe((data: any) => {
       this.newBorrow = data;
-      
-      this.bookService.getBookById(this.newBorrow.bookId).subscribe((book: any)=>{
+
+      this.bookService.getBookById(this.newBorrow.bookId).subscribe((book: any) => {
 
         const currentBookQuantity = book.quantity || 0;
         const newBookQuantity = currentBookQuantity - 1;
         this.bookService.updateBookQuantity(this.newBorrow.bookId, newBookQuantity).subscribe();
-        
+
         const currentQuantityBorrow = book.quantityBorrowed;
         const newQuantityBorrowed = currentQuantityBorrow + 1;
         this.bookService.updateBookQuantityBorrowed(this.newBorrow.bookId, newQuantityBorrowed).subscribe();

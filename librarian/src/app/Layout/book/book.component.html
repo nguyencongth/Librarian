@@ -7,22 +7,24 @@
 <!-- Filter book name -->
 <mat-form-field>
   <mat-label>Filter with book name</mat-label>
-  <input matInput placeholder="Ex. ium" #input>
+  <input matInput (keyup)="applyNameFilter($event)" placeholder="Ex. ium">
 </mat-form-field>
 <!-- Filter category name -->
 <mat-form-field>
   <mat-label>Filter with category name</mat-label>
-  <input matInput placeholder="Ex. ium" #input>
+  <input matInput (keyup)="applyCategoryFilter($event)" placeholder="Ex. ium">
 </mat-form-field>
 <!-- Filter status -->
 <mat-form-field>
   <mat-label>Filter with status</mat-label>
-  <mat-select [(value)]="selected">
+  <mat-select [(value)]="selected" (selectionChange)="applyStatusFilter()">
     <mat-option value="all">All</mat-option>
     <mat-option value="available">Available</mat-option>
-    <mat-option value="runoutofbook">Run Out Of Book</mat-option>
+    <mat-option value="outOfStock">Run Out Of Book</mat-option>
   </mat-select>
 </mat-form-field>
+
+<button mat-raised-button color="accent" (click)="resetFilters()">Reset Filters</button>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -60,7 +62,7 @@
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity > 0 ? 'available' : 'out of books'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
 
     <!-- Actions Column -->
@@ -70,7 +72,8 @@
         <button style="margin-right: 4px;" mat-raised-button color="primary" (click)="navigateToDetail(element.id)">
           Detail
         </button>
-        <button style="margin-right: 4px;" mat-raised-button color="warn" (click)="deleteBook(element.id)" [disabled]="element.quantityBorrowed > 0">Delete</button>
+        <button style="margin-right: 4px;" mat-raised-button color="warn" (click)="deleteBook(element.id)"
+          [disabled]="element.quantityBorrowed > 0">Delete</button>
         <button mat-raised-button (click)="openDialog(element.id)">Borrow</button>
       </td>
     </ng-container>

@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { BookService } from '../../core/Services/book.service';
 import { BorrowService } from '../../core/Services/borrow.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-borrow',
@@ -35,13 +36,13 @@ export class BorrowComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService) { }
   ngOnInit(): void {
-    this.getBorrowDate();
+    this.getBorrowData();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  getBorrowDate() {
-    this.borrowService.getBorrow().subscribe((borrow: any)=>{
+  getBorrowData() {
+    this.borrowService.getBorrow().subscribe((borrow: any) => {
       this.data = borrow;
       this.dataSource.data = this.data;
     })
@@ -71,7 +72,7 @@ export class BorrowComponent implements OnInit, AfterViewInit {
               const currentBookQuantity = book.quantity || 0;
               const newBookQuantity = currentBookQuantity + 1;
               this.bookService.updateBookQuantity(updateRow.bookId, newBookQuantity).subscribe()
-              
+
               const currentQuantityBorrow = book.quantityBorrowed;
               const newQuantityBorrowed = currentQuantityBorrow - 1;
               this.bookService.updateBookQuantityBorrowed(updateRow.bookId, newQuantityBorrowed).subscribe()

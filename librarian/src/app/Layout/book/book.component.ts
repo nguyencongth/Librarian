@@ -4,7 +4,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,7 +37,6 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   selected = '';
   displayedColumns: string[] = ['position', 'categoryName', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
   data: any[] = [];
-  categoris: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -63,20 +62,31 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+
   getBookData() {
-    this.subscription = this.bookService.getBook().subscribe((book: any)=>{
+    this.subscription = this.bookService.getBook().subscribe((book: any) => {
       this.data = book;
       this.dataSource.data = this.data;
-      this.getCategoryNames();   
+      this.getCategoryNames();
+      this.updateBookStatus()
     })
   }
 
+  updateBookStatus() {
+    for (const book of this.data) {
+      const newStatus = book.quantity === 0 ? 'outOfStock' : 'available';
+      if (book.status !== newStatus) {
+        this.bookService.updateBookStatus(book.id, book.quantity).subscribe();
+      }
+    }
+  }
+
   deleteBook(id: number): void {
-    if( window.confirm('Are you sure you want to delete?')) {
-      this.subscription = this.bookService.deleteBook(id).subscribe();
+    if (window.confirm('Are you sure you want to delete?')) {
+      this.bookService.deleteBook(id).subscribe();
       this.getBookData();
     } else return;
-   
+
   }
 
   applyFilter(event: Event) {
@@ -88,16 +98,67 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  applyNameFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      return data.name.toLowerCase().includes(filter);
+    };
+
+    this.dataSource.filter = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  applyCategoryFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      return data.categoryName.toLowerCase().includes(filter);
+    };
+
+    this.dataSource.filter = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  applyStatusFilter() {
+    if (this.selected === 'all') {
+      this.dataSource.filter = '';
+    } else {
+      this.dataSource.filter = this.selected;
+    }
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   navigateToDetail(id: number) {
     this.route.navigate(['/dashboard/books', id]);
   }
 
   openDialog(id: number): void {
-    const selectedItem = this.dataSource.data.find(book => book.id === id); 
+    const selectedItem = this.dataSource.data.find(book => book.id === id);
     if (selectedItem) {
-        this.dialog.open(DialogBorrowComponent, {
+      this.dialog.open(DialogBorrowComponent, {
         data: selectedItem
-      });    
+      });
+    }
+  }
+
+  resetFilters() {
+    const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('mat-form-field input');
+    inputs.forEach((input: HTMLInputElement) => {
+      input.value = '';
+    });
+    this.dataSource.filter = '';
+    this.selected = 'all';
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 }
