@@ -16,32 +16,32 @@
 
         <!-- borrowName Column -->
         <ng-container matColumnDef="borrowName">
-            <th mat-header-cell *matHeaderCellDef> borrowName </th>
+            <th mat-header-cell *matHeaderCellDef> Borrower Name </th>
             <td mat-cell *matCellDef="let element"> {{element.borrowName}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="bookId">
-            <th mat-header-cell *matHeaderCellDef> bookId </th>
-            <td mat-cell *matCellDef="let element"> {{element.bookId}} </td>
+            <th mat-header-cell *matHeaderCellDef> Book Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.bookName}} </td>
         </ng-container>
 
         <!-- categoryId Column -->
         <ng-container matColumnDef="categoryId">
-            <th mat-header-cell *matHeaderCellDef> categoryId </th>
-            <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+            <th mat-header-cell *matHeaderCellDef> Category Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
         </ng-container>
 
         <!-- Borrow Date Column -->
         <ng-container matColumnDef="borrowDate">
             <th mat-header-cell *matHeaderCellDef> Borrow Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.borrowDate}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.borrowDate | date:'medium'}} </td>
         </ng-container>
 
         <!-- dueDate Column -->
         <ng-container matColumnDef="dueDate">
             <th mat-header-cell *matHeaderCellDef> Due Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.dueDate | date:'medium'}} </td>
         </ng-container>
 
         <!-- Status Column -->

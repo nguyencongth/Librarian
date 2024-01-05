@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -20,6 +21,7 @@ import { CategoriesService } from '../../core/Services/categories.service';
   selector: 'app-book',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
@@ -76,7 +78,9 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     for (const book of this.data) {
       const newStatus = book.quantity === 0 ? 'outOfStock' : 'available';
       if (book.status !== newStatus) {
-        this.bookService.updateBookStatus(book.id, book.quantity).subscribe();
+        this.bookService.updateBookStatus(book.id, book.quantity).subscribe(()=>{
+          this.getBookData()
+        });
       }
     }
   }
@@ -86,7 +90,6 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
       this.bookService.deleteBook(id).subscribe();
       this.getBookData();
     } else return;
-
   }
 
   applyFilter(event: Event) {

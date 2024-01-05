@@ -33,7 +33,7 @@ import { BookService } from '../../core/Services/book.service';
 })
 export class DialogBorrowComponent implements OnInit {
   dataBook: any;
-  newBorrow: any = { borrowName: '', bookId: this.data.id, categoryId: this.data.categoryId, borrowDate: new Date().toLocaleDateString(), dueDate: '', status: "Borrowing" }
+  newBorrow: any = { borrowName: '', bookId: this.data.id, categoryId: this.data.categoryId, borrowDate: new Date(), dueDate: '', status: "Borrowing" }
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private borrowService: BorrowService,

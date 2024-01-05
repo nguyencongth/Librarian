@@ -1,4 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -10,12 +11,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { BookService } from '../../core/Services/book.service';
 import { BorrowService } from '../../core/Services/borrow.service';
-import { Router } from '@angular/router';
+import { CategoriesService } from '../../core/Services/categories.service';
 
 @Component({
   selector: 'app-borrow',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
@@ -34,7 +36,7 @@ export class BorrowComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService) { }
+  constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService, private categoryService: CategoriesService) { }
   ngOnInit(): void {
     this.getBorrowData();
   }
@@ -45,6 +47,26 @@ export class BorrowComponent implements OnInit, AfterViewInit {
     this.borrowService.getBorrow().subscribe((borrow: any) => {
       this.data = borrow;
       this.dataSource.data = this.data;
+      this.getCategorieName();
+      this.getBookName();
+    })
+  }
+
+  getCategorieName() {
+    this.data.forEach((borrow, index)=>{
+      this.categoryService.getCategoryById(borrow.categoryId).subscribe((category: any)=>{
+        this.data[index].categoryName = category.name;
+        this.dataSource.data = [...this.data];
+      })
+    })
+  }
+
+  getBookName() {
+    this.data.forEach((borrow, index)=>{
+      this.bookService.getBookById(borrow.bookId).subscribe((book: any)=>{
+        this.data[index].bookName = book.name;
+        this.dataSource.data = [...this.data];
+      })
     })
   }
 
@@ -57,7 +79,7 @@ export class BorrowComponent implements OnInit, AfterViewInit {
     }
   }
   returnBook(row: any) {
-    row.dueDate = new Date().toLocaleDateString();
+    row.dueDate = new Date();
     row.status = 'Returned';
     this.http.patch(`http://localhost:3000/borrow/${row.id}`, { dueDate: row.dueDate, status: row.status })
       .subscribe((updateRow: any) => {
