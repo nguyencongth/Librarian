@@ -45,16 +45,16 @@
       "id": 1,
       "categoryId": 1,
       "name": "Angular Programming",
-      "quantity": 21,
-      "quantityBorrowed": 0,
+      "quantity": 20,
+      "quantityBorrowed": 1,
       "status": "available"
     },
     {
       "id": 2,
       "categoryId": 1,
       "name": "Javascript",
-      "quantity": 20,
-      "quantityBorrowed": 1,
+      "quantity": 19,
+      "quantityBorrowed": 2,
       "status": "available"
     },
     {
@@ -104,22 +104,6 @@
       "quantityBorrowed": 0,
       "status": "available",
       "id": 10
-    },
-    {
-      "name": "War",
-      "categoryId": 3,
-      "quantity": 0,
-      "quantityBorrowed": 0,
-      "status": "outOfStock",
-      "id": 11
-    },
-    {
-      "name": "Love",
-      "categoryId": 4,
-      "quantity": 1,
-      "quantityBorrowed": 0,
-      "status": "available",
-      "id": 12
     }
   ],
   "borrow": [
@@ -140,15 +124,6 @@
       "dueDate": "2024-01-05T02:52:23.009Z",
       "status": "Returned",
       "id": 2
-    },
-    {
-      "borrowName": "David",
-      "bookId": 12,
-      "categoryId": 4,
-      "borrowDate": "5/1/2024",
-      "dueDate": "2024-01-05T02:52:05.450Z",
-      "status": "Returned",
-      "id": 3
     },
     {
       "borrowName": "Truong Van Tuan",
@@ -176,6 +151,42 @@
       "dueDate": "",
       "status": "Borrowing",
       "id": 6
+    },
+    {
+      "borrowName": "AAAAAAA",
+      "bookId": 10,
+      "categoryId": 1,
+      "borrowDate": "2024-01-05T09:10:48.554Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 7
+    },
+    {
+      "borrowName": "ggggggg",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2024-01-05T09:27:37.345Z",
+      "dueDate": "2024-01-05T09:28:16.362Z",
+      "status": "Returned",
+      "id": 8
+    },
+    {
+      "borrowName": "vbvbbvbvb",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2024-01-05T09:28:21.537Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 9
+    },
+    {
+      "borrowName": "bbbbaaaa",
+      "bookId": 2,
+      "categoryId": 1,
+      "borrowDate": "2024-01-05T09:29:55.327Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 10
     }
   ]
 }

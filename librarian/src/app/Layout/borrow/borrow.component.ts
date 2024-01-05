@@ -12,6 +12,7 @@ import { OnInit } from '@angular/core';
 import { BookService } from '../../core/Services/book.service';
 import { BorrowService } from '../../core/Services/borrow.service';
 import { CategoriesService } from '../../core/Services/categories.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-borrow',
@@ -38,36 +39,39 @@ export class BorrowComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService, private categoryService: CategoriesService) { }
   ngOnInit(): void {
-    this.getBorrowData();
+    this.getData();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  getBorrowData() {
-    this.borrowService.getBorrow().subscribe((borrow: any) => {
-      this.data = borrow;
-      this.dataSource.data = this.data;
-      this.getCategorieName();
-      this.getBookName();
-    })
-  }
 
-  getCategorieName() {
-    this.data.forEach((borrow, index)=>{
-      this.categoryService.getCategoryById(borrow.categoryId).subscribe((category: any)=>{
-        this.data[index].categoryName = category.name;
-        this.dataSource.data = [...this.data];
+  getData() {
+    forkJoin(
+      [
+        this.borrowService.getBorrow(),
+        this.bookService.getBook(),
+        this.categoryService.category(),
+      ],
+      (borrowList, bookList, categoryList) => {
+        return {
+          borrows: borrowList,
+          books: bookList,
+          categories: categoryList
+        };
+      }
+    ).subscribe((data)=>{
+      const newData = data.borrows.map((x: any) => {
+        const categoryName = data.categories.find(c => c.id === x.categoryId);
+        const bookName = data.books.find((c:any) => c.id === x.bookId);
+        return {
+          ...x,
+          categoryName: categoryName ? categoryName.name : null,
+          bookName: bookName ? bookName.name : null
+        }
       })
-    })
-  }
-
-  getBookName() {
-    this.data.forEach((borrow, index)=>{
-      this.bookService.getBookById(borrow.bookId).subscribe((book: any)=>{
-        this.data[index].bookName = book.name;
-        this.dataSource.data = [...this.data];
-      })
-    })
+      
+    this.dataSource.data = [...newData];  
+    });
   }
 
   applyFilter(event: Event) {

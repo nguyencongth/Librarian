@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -47,8 +47,9 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private bookService: BookService, private categoryService: CategoriesService, private route: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getBookData();
+    this.getData()
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -56,30 +57,39 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getCategoryNames() {
-    this.data.forEach((book, index) => {
-      this.categoryService.getCategoryById(book.categoryId).subscribe((category: any) => {
-        this.data[index].categoryName = category.name;
-        this.dataSource.data = [...this.data];
-      });
+  getData() {
+    forkJoin(
+      [
+        this.bookService.getBook(),
+        this.categoryService.category(),
+      ],
+      (bookList, categoryList) => {
+        return {
+          books: bookList,
+          categories: categoryList
+        };
+      }
+    ).subscribe((data)=>{
+      const newData = data.books.map((x: any) => {
+        const found = data.categories.find(c => c.id === x.categoryId)
+        return {
+          ...x,
+          categoryName: found ? found.name : null
+        }
+      })
+    this.dataSource.data = [...newData];
+    this.updateBookStatus()  
     });
   }
 
-  getBookData() {
-    this.subscription = this.bookService.getBook().subscribe((book: any) => {
-      this.data = book;
-      this.dataSource.data = this.data;
-      this.getCategoryNames();
-      this.updateBookStatus()
-    })
-  }
-
   updateBookStatus() {
-    for (const book of this.data) {
+    for (const book of this.dataSource.data) {
+      console.log(book);
+      
       const newStatus = book.quantity === 0 ? 'outOfStock' : 'available';
       if (book.status !== newStatus) {
         this.bookService.updateBookStatus(book.id, book.quantity).subscribe(()=>{
-          this.getBookData()
+          this.getData();
         });
       }
     }
@@ -88,7 +98,7 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteBook(id: number): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.bookService.deleteBook(id).subscribe();
-      this.getBookData();
+      this.getData();
     } else return;
   }
 
@@ -164,4 +174,5 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.paginator.firstPage();
     }
   }
+ 
 }
