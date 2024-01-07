@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../core/Services/categories.service';
-import { Subject, Subscription, interval, mergeMap, scan } from 'rxjs';
+import { Subject, Subscription, interval, mergeMap, scan, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -35,8 +35,8 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private route: Router, private categoryService: CategoriesService) { }
-  subscription  = new Subscription();
-  
+  subscription = new Subscription();
+
   ngOnInit(): void {
     this.getCategoriesData();
   }
@@ -49,7 +49,7 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getCategoriesData() {
-    this.subscription = this.categoryService.category().subscribe((category: any)=>{
+    this.subscription = this.categoryService.category().subscribe((category: any) => {
       this.data = category;
       this.dataSource.data = this.data;
     })
@@ -65,9 +65,13 @@ export class CategoryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteCategory(id: number) {
-    if(window.confirm('Are you sure you want to delete')){
-      this.categoryService.deleteCategory(id).subscribe();
-      this.getCategoriesData();
+    if (window.confirm('Are you sure you want to delete')) {
+      this.categoryService.deleteCategory(id).pipe(
+        switchMap(() => this.categoryService.category())
+      ).subscribe((category: any) => {
+        this.data = category;
+        this.dataSource.data = this.data;
+      })
     } else return;
   }
 

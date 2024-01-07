@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -23,7 +23,23 @@ export class CategoriesService {
   addCategory(newCategory: any): Observable<any> {
     return this.http.post<any>(`${this.urlApi}`, newCategory);
   }
+  categoryHasBooks(categoryId: number): Observable<boolean> {
+    return this.http.get<any[]>(`http://localhost:3000/books`).pipe(
+      map((books: any[]) => {
+        return books.some(book => book.categoryId === categoryId);
+      })
+    )
+  }
   deleteCategory(id: number): Observable<any> {
-    return this.http.delete(`${this.urlApi}/${id}`)
+    return this.categoryHasBooks(id).pipe(
+      switchMap(hasBooks => {
+        if (hasBooks) {
+          window.alert('This category contains books. Can not delete');
+          return of(false);
+        } else {
+          return this.http.delete(`${this.urlApi}/${id}`)
+        }
+      })
+    );
   }
 }
