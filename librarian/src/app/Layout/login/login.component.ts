@@ -31,7 +31,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard'])
         }
         else {
-          this.router.navigate(['/'])
+          this.router.navigate(['/login']);
           window.alert("The username or password incorrect");
           this.username = '';
           this.password = '';

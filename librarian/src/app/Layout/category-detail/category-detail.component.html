@@ -1,18 +1,18 @@
 <div class="container">
-    <div class="detail">
-      <form class="example-form">
-          <h2 class="title">Category Detail</h2>
-          <mat-form-field class="formInput">
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="category.name" name="name">
-          </mat-form-field>
-          <br>
-          <div class="btnSave">
-            <button mat-raised-button color="primary" (click)="save()">
-              Save
-            </button>
-          </div>
-      </form>
-    </div>
+  <div class="detail">
+    <form class="example-form" [formGroup]="formCategoryDetail" (ngSubmit)="onSave()">
+      <h2 class="title">Category Detail</h2>
+      <mat-form-field class="formInput">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" name="name">
+        <mat-error *ngIf="formCategoryDetail.controls.name.invalid">Name is required</mat-error>
+      </mat-form-field>
+      <br>
+      <div class="btnSave">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!formCategoryDetail.valid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-    

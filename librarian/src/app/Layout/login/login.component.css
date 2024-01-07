@@ -1,13 +1,15 @@
 .login {
     width: 400px;
-    margin: 150px auto;
+    margin: 50px auto;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 48px 32px;
 }
+
 .login .title {
     text-align: center;
 }
+
 #btnLogin {
     width: 100%;
 }

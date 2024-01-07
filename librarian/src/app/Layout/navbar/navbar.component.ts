@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatMenuModule } from '@angular/material/menu';
 import { BookComponent } from '../book/book.component';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../core/Services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -32,9 +33,16 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 export class NavbarComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
+  constructor(private authService: AuthService, private router: Router) { }
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

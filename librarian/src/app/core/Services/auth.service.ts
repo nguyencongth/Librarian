@@ -14,12 +14,13 @@ export class AuthService {
   private LoggedIn = false;
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.LoggedIn == !!localStorage.getItem('loggedIn');
+  }
   login(username: string, password: string): Observable<boolean> {
 
     return this.http.get<Manager[]>(`${this.apiUrl}/manager`).pipe(
       map(managers => {
-        console.log(managers);
         const account = managers.find(manager => {
           return manager.username === username && manager.password === password;
         });
@@ -27,16 +28,16 @@ export class AuthService {
           this.LoggedIn = true;
           localStorage.setItem('loggedIn', 'true');
           return true;
-        } else {
-          return false;
         }
+        return false;
       })
     );
 
   }
 
-  isLoggedIn(): boolean {
-    return this.LoggedIn;
+  logout(): void {
+    this.LoggedIn = false;
+    localStorage.removeItem('loggedIn');
   }
 
 }

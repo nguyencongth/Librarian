@@ -36,8 +36,12 @@
       "id": 7
     },
     {
-      "name": "dfdgfdg",
+      "name": "dfdgfdg11",
       "id": 8
+    },
+    {
+      "name": "tacada123",
+      "id": 9
     }
   ],
   "books": [
@@ -53,14 +57,14 @@
       "id": 2,
       "categoryId": 1,
       "name": "Javascript",
-      "quantity": 19,
-      "quantityBorrowed": 2,
+      "quantity": 20,
+      "quantityBorrowed": 1,
       "status": "available"
     },
     {
       "id": 3,
       "categoryId": 2,
-      "name": "dvvsvsdv",
+      "name": "Book no name",
       "quantity": 21,
       "quantityBorrowed": 0,
       "status": "available"
@@ -83,7 +87,7 @@
     },
     {
       "categoryId": 5,
-      "name": "qwer",
+      "name": "HiHi",
       "quantity": 10,
       "quantityBorrowed": 0,
       "status": "available",
@@ -104,6 +108,22 @@
       "quantityBorrowed": 0,
       "status": "available",
       "id": 10
+    },
+    {
+      "name": "Rabbit and Turtle",
+      "categoryId": 5,
+      "quantity": 0,
+      "quantityBorrowed": 1,
+      "status": "outOfStock",
+      "id": 11
+    },
+    {
+      "name": "C++ programming",
+      "categoryId": 1,
+      "quantity": 10,
+      "quantityBorrowed": 0,
+      "status": "available",
+      "id": 12
     }
   ],
   "borrow": [
@@ -184,9 +204,36 @@
       "bookId": 2,
       "categoryId": 1,
       "borrowDate": "2024-01-05T09:29:55.327Z",
+      "dueDate": "2024-01-07T13:56:31.881Z",
+      "status": "Returned",
+      "id": 10
+    },
+    {
+      "borrowName": "rrrrrr",
+      "bookId": 11,
+      "categoryId": 5,
+      "borrowDate": "2024-01-07T07:27:18.324Z",
+      "dueDate": "2024-01-07T07:27:50.650Z",
+      "status": "Returned",
+      "id": 11
+    },
+    {
+      "borrowName": "thanh",
+      "bookId": 11,
+      "categoryId": 5,
+      "borrowDate": "2024-01-07T08:32:26.142Z",
+      "dueDate": "2024-01-07T13:57:04.167Z",
+      "status": "Returned",
+      "id": 12
+    },
+    {
+      "borrowName": "Cong Thanh",
+      "bookId": 11,
+      "categoryId": 5,
+      "borrowDate": "2024-01-07T13:58:44.310Z",
       "dueDate": "",
       "status": "Borrowing",
-      "id": 10
+      "id": 13
     }
   ]
 }

@@ -16,18 +16,19 @@
   z-index: 1;
 }
 
-.valign-center {
+.align-center {
   display: flex;
   align-items: center;
-}
-
-button {
-  margin-bottom: 18px;
 }
 
 .dashboard {
   cursor: pointer;
 }
+
 .mat-list {
   padding: 8px 16px;
+}
+
+.librarian-title {
+  flex: 1;
 }

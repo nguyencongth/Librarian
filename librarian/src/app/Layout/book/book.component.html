@@ -74,7 +74,7 @@
         </button>
         <button style="margin-right: 4px;" mat-raised-button color="warn" (click)="deleteBook(element.id)"
           [disabled]="element.quantityBorrowed > 0">Delete</button>
-        <button mat-raised-button (click)="openDialog(element.id)">Borrow</button>
+        <button mat-raised-button [disabled]="element.quantity === 0" (click)="openDialog(element.id)">Borrow</button>
       </td>
     </ng-container>
 

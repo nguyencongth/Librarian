@@ -8,7 +8,7 @@
     <!-- Start Book -->
     <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="book">
-        <div class="valign-center">
+        <div class="align-center">
           <mat-icon>library_books</mat-icon>
           Manager Books
           <span><i class="material-icons">arrow_drop_down</i></span>
@@ -16,7 +16,7 @@
       </button>
       <mat-menu #book="matMenu">
         <a mat-menu-item [routerLink]="['/dashboard/addBook']">
-          <div class="valign-center">
+          <div class="align-center">
             Create
             <div>
               <i class="material-icons">add</i>
@@ -30,7 +30,7 @@
     <!-- Start Category -->
     <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="category">
-        <div class="valign-center">
+        <div class="align-center">
           <mat-icon>category</mat-icon>
           Manager Categories
           <span><i class="material-icons">arrow_drop_down</i></span>
@@ -38,7 +38,7 @@
       </button>
       <mat-menu #category="matMenu">
         <a mat-menu-item [routerLink]="['/dashboard/addCategory']">
-          <div class="valign-center">
+          <div class="align-center">
             Create
             <div>
               <i class="material-icons">add</i>
@@ -52,7 +52,7 @@
     <!-- Start Borrow -->
     <mat-nav-list class="mat-list">
       <button mat-button [matMenuTriggerFor]="borrow">
-        <div class="valign-center">
+        <div class="align-center">
           <mat-icon>calendar_month</mat-icon>
           Manager Borrows
           <span><i class="material-icons">arrow_drop_down</i></span>
@@ -71,10 +71,15 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <span>Librarian</span>
+      <span class="librarian-title">Librarian</span>
+      <div class="logout-button">
+        <button mat-button (click)="logout()">
+          <i class="material-icons">logout</i>
+          Logout
+        </button>
+      </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <!-- <app-book></app-book> -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
