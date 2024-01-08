@@ -1,4 +1,4 @@
-import { Subject, Subscription, forkJoin, interval, takeUntil } from 'rxjs';
+import { Subject, forkJoin, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -46,7 +46,8 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private bookService: BookService, 
     private categoryService: CategoriesService, 
-    private route: Router, public dialog: MatDialog
+    private route: Router, 
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
