@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { OnInit } from '@angular/core';
 import { BookService } from '../../core/Services/book.service';
 import { BorrowService } from '../../core/Services/borrow.service';
 import { CategoriesService } from '../../core/Services/categories.service';
-import { forkJoin, switchMap } from 'rxjs';
+import { Subject, forkJoin, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-borrow',
@@ -31,11 +31,12 @@ import { forkJoin, switchMap } from 'rxjs';
   templateUrl: './borrow.component.html',
   styleUrl: './borrow.component.css'
 })
-export class BorrowComponent implements OnInit, AfterViewInit {
+export class BorrowComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['id', 'borrowName', 'bookId', 'categoryId', 'borrowDate', 'dueDate', 'status', 'actions'];
   data: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  private unsubcribe$ = new Subject<void>();
 
   constructor(
     private bookService: BookService, 
@@ -47,6 +48,10 @@ export class BorrowComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+  ngOnDestroy(): void {
+    this.unsubcribe$.next();
+    this.unsubcribe$.complete();
   }
 
   getData() {
@@ -63,7 +68,11 @@ export class BorrowComponent implements OnInit, AfterViewInit {
           categories: categoryList
         };
       }
-    ).subscribe((data)=>{
+    )
+    .pipe(
+      takeUntil(this.unsubcribe$)
+    )
+    .subscribe((data)=>{
       const newData = data.borrows.map((x: any) => {
         const categoryName = data.categories.find(c => c.id === x.categoryId);
         const bookName = data.books.find((c:any) => c.id === x.bookId);

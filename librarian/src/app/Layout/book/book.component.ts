@@ -1,4 +1,4 @@
-import { Subscription, forkJoin } from 'rxjs';
+import { Subject, Subscription, forkJoin, interval, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -41,7 +41,7 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  subscription = new Subscription();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private bookService: BookService, 
@@ -57,7 +57,8 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   getData() {
@@ -72,7 +73,10 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
           categories: categoryList
         };
       }
-    ).subscribe((data)=>{
+    ).pipe(
+      takeUntil(this.unsubscribe$)
+    )
+    .subscribe((data)=>{
       const newData = data.books.map((x: any) => {
         const found = data.categories.find(c => c.id === x.categoryId)
         return {
