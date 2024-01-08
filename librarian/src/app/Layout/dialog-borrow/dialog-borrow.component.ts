@@ -15,6 +15,7 @@ import { BorrowService } from '../../core/Services/borrow.service';
 import { Router } from '@angular/router';
 import { BookService } from '../../core/Services/book.service';
 import { NgIf } from '@angular/common';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-borrow',
@@ -35,7 +36,6 @@ import { NgIf } from '@angular/common';
   styleUrl: './dialog-borrow.component.css'
 })
 export class DialogBorrowComponent {
-  // dataBook: any;
   formNewBorrow = this.formBuilder.group({
     borrowName: ['', Validators.required],
     bookId: [this.data.id],
@@ -51,24 +51,21 @@ export class DialogBorrowComponent {
     public dialog: MatDialog,
     private route: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
-  borrow(): void {
+  borrow() {
     this.dialog.closeAll();
-    this.borrowService.addBorrow(this.formNewBorrow.value).subscribe((data: any) => {
-
-      this.bookService.getBookById(data.bookId).subscribe((book: any) => {
-
-        const currentBookQuantity = book.quantity || 0;
+    this.borrowService.addBorrow(this.formNewBorrow.value).pipe(
+      switchMap(() => {
+        const currentBookQuantity = this.data.quantity;
+        const currentQuantityBorrow = this.data.quantityBorrowed;
         const newBookQuantity = currentBookQuantity - 1;
-        this.bookService.updateBookQuantity(data.bookId, newBookQuantity).subscribe();
-
-        const currentQuantityBorrow = book.quantityBorrowed;
         const newQuantityBorrowed = currentQuantityBorrow + 1;
-        this.bookService.updateBookQuantityBorrowed(data.bookId, newQuantityBorrowed).subscribe();
+        
+        return this.bookService.updateBookBorrow(this.data.id, newBookQuantity, newQuantityBorrowed)
       })
-      window.alert("Borrow successfully");
-      this.route.navigate(['/dashboard/borrows']);
-    })
+    ).subscribe();
+    window.alert("Borrow successfully");
+    this.route.navigate(['/dashboard/borrows']);
   }
 }

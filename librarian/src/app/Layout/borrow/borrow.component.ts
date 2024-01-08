@@ -7,12 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { BookService } from '../../core/Services/book.service';
 import { BorrowService } from '../../core/Services/borrow.service';
 import { CategoriesService } from '../../core/Services/categories.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-borrow',
@@ -37,7 +37,11 @@ export class BorrowComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private bookService: BookService, private borrowService: BorrowService, private categoryService: CategoriesService) { }
+  constructor(
+    private bookService: BookService, 
+    private borrowService: BorrowService, 
+    private categoryService: CategoriesService,
+    ) { }
   ngOnInit(): void {
     this.getData();
   }
@@ -82,28 +86,22 @@ export class BorrowComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   returnBook(row: any) {
     row.dueDate = new Date();
     row.status = 'Returned';
-    this.http.patch(`http://localhost:3000/borrow/${row.id}`, { dueDate: row.dueDate, status: row.status })
-      .subscribe((updateRow: any) => {
-        const index = this.dataSource.data.findIndex((dataRow) => dataRow.id === updateRow.id);
-        if (index !== -1) {
-          this.dataSource.data[index] = updateRow;
-          this.dataSource._updateChangeSubscription();
-
-          this.bookService.getBookById(updateRow.bookId)
-            .subscribe((book: any) => {
-
-              const currentBookQuantity = book.quantity || 0;
-              const newBookQuantity = currentBookQuantity + 1;
-              this.bookService.updateBookQuantity(updateRow.bookId, newBookQuantity).subscribe()
-
-              const currentQuantityBorrow = book.quantityBorrowed;
-              const newQuantityBorrowed = currentQuantityBorrow - 1;
-              this.bookService.updateBookQuantityBorrowed(updateRow.bookId, newQuantityBorrowed).subscribe()
-            })
-        }
+    this.borrowService.returnBook(row.id, row.dueDate, row.status).pipe(
+      switchMap((data: any) => {
+        return this.bookService.getBookById(data.bookId).pipe(
+          switchMap((book: any) => {
+            const currentBookQuantity = book.quantity;
+            const currentBookQuantityBorrow = book.quantityBorrowed;
+            const newBookQuantity = currentBookQuantity + 1;
+            const newQuantityBorrowed = currentBookQuantityBorrow - 1;         
+            return this.bookService.updateBookBorrow(book.id, newBookQuantity, newQuantityBorrowed);
+          })
+        )
       })
+    ).subscribe();
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +21,11 @@ export class BookService {
   addBook(newBook: any): Observable<any> {
     return this.http.post<any>(`${this.urlApi}`, newBook);
   }
-  updateBookQuantity(bookId: number, newBookQuantity: number): Observable<any> {
-    return this.http.patch(`${this.urlApi}/${bookId}`, { quantity: newBookQuantity });
-  }
-  updateBookQuantityBorrowed(bookId: number, newQuantityBorrowed: number): Observable<any> {
-    return this.http.patch(`${this.urlApi}/${bookId}`, { quantityBorrowed: newQuantityBorrowed });
-  }
-  updateBookStatus(bookId: number, quantity: number): Observable<any> {
-    const status = quantity === 0 ? 'outOfStock' : 'available';
-
-    return this.http.patch(`${this.urlApi}/${bookId}`, { status });
-  }
   deleteBook(id: number): Observable<any> {
     return this.http.delete(`${this.urlApi}/${id}`)
+  }
+  updateBookBorrow(bookId: number, newBookQuantity: number, newQuantityBorrowed: number): Observable<any> {
+    const status = newBookQuantity === 0 ? 'outOfStock' : 'available';
+    return this.http.patch(`${this.urlApi}/${bookId}`, {quantity: newBookQuantity, quantityBorrowed: newQuantityBorrowed, status});
   }
 }

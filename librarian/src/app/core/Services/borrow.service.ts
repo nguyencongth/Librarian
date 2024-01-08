@@ -17,4 +17,7 @@ export class BorrowService {
   addBorrow(newBorrow: any): Observable<any> {
     return this.http.post(`${this.urlApi}`, newBorrow);
   }
+  returnBook(id: number, dueDate: Date, status: string):Observable<any> {
+    return this.http.patch(`${this.urlApi}/${id}`,{dueDate: dueDate, status: status})
+  }
 }

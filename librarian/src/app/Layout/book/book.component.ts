@@ -81,19 +81,7 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     this.dataSource.data = [...newData];
-    this.updateBookStatus()  
     });
-  }
-
-  updateBookStatus() {
-    for (const book of this.dataSource.data) {
-      const newStatus = book.quantity === 0 ? 'outOfStock' : 'available';
-      if (book.status !== newStatus) {
-        this.bookService.updateBookStatus(book.id, book.quantity).subscribe(()=>{
-          this.getData();
-        });
-      }
-    }
   }
 
   deleteBook(id: number): void {

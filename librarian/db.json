@@ -116,6 +116,22 @@
       "quantityBorrowed": 0,
       "status": "available",
       "id": 12
+    },
+    {
+      "name": "wwwwwww",
+      "categoryId": 7,
+      "quantity": 10,
+      "quantityBorrowed": 0,
+      "status": "available",
+      "id": 13
+    },
+    {
+      "name": "hhhhhh",
+      "categoryId": 3,
+      "quantity": 0,
+      "quantityBorrowed": 1,
+      "status": "outOfStock",
+      "id": 14
     }
   ],
   "borrow": [
@@ -226,6 +242,33 @@
       "dueDate": "",
       "status": "Borrowing",
       "id": 13
+    },
+    {
+      "borrowName": "thanh",
+      "bookId": 14,
+      "categoryId": 3,
+      "borrowDate": "2024-01-08T07:06:28.174Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 15
+    },
+    {
+      "borrowName": "tuan",
+      "bookId": 13,
+      "categoryId": 7,
+      "borrowDate": "2024-01-08T08:03:26.797Z",
+      "dueDate": "2024-01-08T08:03:50.116Z",
+      "status": "Returned",
+      "id": 16
+    },
+    {
+      "borrowName": "thanh",
+      "bookId": 13,
+      "categoryId": 7,
+      "borrowDate": "2024-01-08T08:04:33.691Z",
+      "dueDate": "2024-01-08T08:04:50.025Z",
+      "status": "Returned",
+      "id": 17
     }
   ]
 }
