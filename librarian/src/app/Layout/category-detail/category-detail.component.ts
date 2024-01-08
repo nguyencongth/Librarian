@@ -47,8 +47,6 @@ export class CategoryDetailComponent implements OnInit {
           id: data.id,
           name: data.name
         })
-        console.log(this.formCategoryDetail.value);
-
       })
     })
   }

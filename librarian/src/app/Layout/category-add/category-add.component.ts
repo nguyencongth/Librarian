@@ -28,7 +28,11 @@ import { Subscription } from 'rxjs';
 export class CategoryAddComponent implements OnDestroy {
   
   subcription = new Subscription();
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoriesService, private route: Router){}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private categoryService: CategoriesService, 
+    private route: Router
+    ){}
   categoryForm = this.formBuilder.group({
     name: ['', Validators.required]
   })

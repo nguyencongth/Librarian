@@ -1,6 +1,6 @@
 import { Subscription, forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBorrowComponent } from '../dialog-borrow/dialog-borrow.component';
@@ -37,14 +36,18 @@ import { CategoriesService } from '../../core/Services/categories.service';
 })
 export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   selected = '';
-  displayedColumns: string[] = ['position', 'categoryName', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'categoryName', 'name', 'quantity', 'quantityBorrowed', 'status', 'actions'];
   data: any[] = [];
   dataSource = new MatTableDataSource(this.data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   subscription = new Subscription();
 
-  constructor(private bookService: BookService, private categoryService: CategoriesService, private route: Router, public dialog: MatDialog) { }
+  constructor(
+    private bookService: BookService, 
+    private categoryService: CategoriesService, 
+    private route: Router, public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.getData()
@@ -84,8 +87,6 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateBookStatus() {
     for (const book of this.dataSource.data) {
-      console.log(book);
-      
       const newStatus = book.quantity === 0 ? 'outOfStock' : 'available';
       if (book.status !== newStatus) {
         this.bookService.updateBookStatus(book.id, book.quantity).subscribe(()=>{
@@ -113,13 +114,10 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
 
   applyNameFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       return data.name.toLowerCase().includes(filter);
     };
-
     this.dataSource.filter = filterValue;
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -130,9 +128,7 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       return data.categoryName.toLowerCase().includes(filter);
     };
-
     this.dataSource.filter = filterValue;
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -144,7 +140,6 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.dataSource.filter = this.selected;
     }
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -174,5 +169,5 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.paginator.firstPage();
     }
   }
- 
+
 }

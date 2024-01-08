@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../core/Services/categories.service';
-import { Subject, Subscription, interval, mergeMap, scan, switchMap } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-category',
