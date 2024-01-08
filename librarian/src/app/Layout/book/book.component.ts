@@ -44,11 +44,11 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private bookService: BookService, 
-    private categoryService: CategoriesService, 
-    private route: Router, 
+    private bookService: BookService,
+    private categoryService: CategoriesService,
+    private route: Router,
     public dialog: MatDialog
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getData()
@@ -77,16 +77,16 @@ export class BookComponent implements OnInit, AfterViewInit, OnDestroy {
     ).pipe(
       takeUntil(this.unsubscribe$)
     )
-    .subscribe((data)=>{
-      const newData = data.books.map((x: any) => {
-        const found = data.categories.find(c => c.id === x.categoryId)
-        return {
-          ...x,
-          categoryName: found ? found.name : null
-        }
-      })
-    this.dataSource.data = [...newData];
-    });
+      .subscribe((data) => {
+        const newData = data.books.map((x: any) => {
+          const found = data.categories.find(c => c.id === x.categoryId)
+          return {
+            ...x,
+            categoryName: found ? found.name : null
+          }
+        })
+        this.dataSource.data = [...newData];
+      });
   }
 
   deleteBook(id: number): void {
