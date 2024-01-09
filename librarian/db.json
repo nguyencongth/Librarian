@@ -41,7 +41,7 @@
       "id": 1,
       "categoryId": 1,
       "name": "Angular Programming",
-      "quantity": 20,
+      "quantity": 22,
       "quantityBorrowed": 1,
       "status": "available"
     },
@@ -278,6 +278,15 @@
       "dueDate": "",
       "status": "Borrowing",
       "id": 18
+    },
+    {
+      "borrowName": "thanh",
+      "bookId": 1,
+      "categoryId": 1,
+      "borrowDate": "2024-01-09T03:44:26.749Z",
+      "dueDate": "2024-01-09T03:45:02.642Z",
+      "status": "Returned",
+      "id": 19
     }
   ]
 }
