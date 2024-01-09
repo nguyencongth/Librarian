@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BorrowService } from '../../core/Services/borrow.service';
 import { Router } from '@angular/router';
 import { BookService } from '../../core/Services/book.service';
@@ -51,7 +51,7 @@ export class DialogBorrowComponent {
     public dialog: MatDialog,
     private route: Router,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   borrow() {
     this.dialog.closeAll();
@@ -61,11 +61,12 @@ export class DialogBorrowComponent {
         const currentQuantityBorrow = this.data.quantityBorrowed;
         const newBookQuantity = currentBookQuantity - 1;
         const newQuantityBorrowed = currentQuantityBorrow + 1;
-        
+
         return this.bookService.updateBookBorrow(this.data.id, newBookQuantity, newQuantityBorrowed)
       })
-    ).subscribe();
-    window.alert("Borrow successfully");
-    this.route.navigate(['/dashboard/borrows']);
+    ).subscribe(() => {
+      window.alert("Borrow successfully");
+      this.route.navigate(['/dashboard/borrows']);
+    });
   }
 }

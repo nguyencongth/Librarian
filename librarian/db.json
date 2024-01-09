@@ -120,8 +120,8 @@
     {
       "name": "wwwwwww",
       "categoryId": 7,
-      "quantity": 10,
-      "quantityBorrowed": 0,
+      "quantity": 9,
+      "quantityBorrowed": 1,
       "status": "available",
       "id": 13
     },
@@ -269,6 +269,15 @@
       "dueDate": "2024-01-08T08:04:50.025Z",
       "status": "Returned",
       "id": 17
+    },
+    {
+      "borrowName": "th",
+      "bookId": 13,
+      "categoryId": 7,
+      "borrowDate": "2024-01-09T01:53:31.453Z",
+      "dueDate": "",
+      "status": "Borrowing",
+      "id": 18
     }
   ]
 }
