@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class CategoriesService {
-  private urlApi = 'http://localhost:3000/category';
+  private urlApi = 'https://my-json-server.typicode.com/nguyencongth/demo/category';
 
   constructor(private http: HttpClient, private route: Router) { }
 

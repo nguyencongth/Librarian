@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class BorrowService {
 
   constructor(private http: HttpClient) { }
-  private urlApi = 'http://localhost:3000/borrow';
+  private urlApi = 'https://my-json-server.typicode.com/nguyencongth/demo/borrow';
 
   getBorrow(): Observable<any> {
     return this.http.get(this.urlApi);

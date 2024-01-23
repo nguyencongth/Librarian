@@ -6,7 +6,7 @@ import { Observable, retry } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private urlApi = 'http://localhost:3000/books';
+  private urlApi = 'https://my-json-server.typicode.com/nguyencongth/demo/books';
   constructor(private http: HttpClient) { }
 
   getBook(): Observable<any> {

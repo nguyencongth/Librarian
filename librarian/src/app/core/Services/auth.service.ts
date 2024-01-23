@@ -12,7 +12,7 @@ interface Manager {
 })
 export class AuthService {
   private LoggedIn = false;
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://my-json-server.typicode.com/nguyencongth/demo';
 
   constructor(private http: HttpClient) {
     this.LoggedIn == !!localStorage.getItem('loggedIn');
