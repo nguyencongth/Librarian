@@ -24,7 +24,7 @@ export class CategoriesService {
     return this.http.post<any>(`${this.urlApi}`, newCategory);
   }
   categoryHasBooks(categoryId: number): Observable<boolean> {
-    return this.http.get<any[]>(`http://localhost:3000/books`).pipe(
+    return this.http.get<any[]>(`https://my-json-server.typicode.com/nguyencongth/demo/books`).pipe(
       map((books: any[]) => {
         return books.some(book => book.categoryId === categoryId);
       })
